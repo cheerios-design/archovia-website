@@ -1,6 +1,5 @@
-// tailwind.config.js
 module.exports = {
-  content: ["./*.html", "./js/**/*.js"],
+  content: ["./*.html", "./scripts/**/*.js"], // Updated the folder name to 'scripts'
   theme: {
     extend: {
       colors: {
@@ -11,5 +10,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography"), require("@tailwindcss/forms")],
 };
