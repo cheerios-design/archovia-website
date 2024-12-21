@@ -4,10 +4,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#003366",
-        secondary: "#F4C430",
-        accent: "#66BB6A",
-        background: "#F8F4E3",
+        primary: "#232323",
+        secondary: "#151515",
+        accent: "#f3f3f3",
+        background: "#fefefe",
       },
       fontFamily: {
         title: ["Montserrat", "sans-serif"], // For titles
