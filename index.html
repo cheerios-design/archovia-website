@@ -14,7 +14,7 @@
     <!-- Tailwind CSS -->
     <link href="./styles/output.css" rel="stylesheet">
     <!-- Favicon -->
-    <link rel="icon" href="./assets/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="./assets/images/favicon.ico" type="image/x-icon">
     <!-- fonts -->
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Poppins:wght@300;400;500&display=swap"
@@ -22,64 +22,141 @@
 
 </head>
 
-<body class="bg-background text-primary font-sans antialiased overflow-x-hidden">
-    <header class="p-4 bg-background text-secondary">
-        <nav class="container bg-background h-32 mx-auto flex justify-between items-center">
-            <a href="index.html"><img class="ml-5" src="assets/images/archovia-logo-siyah-full-color-rgb.svg" width="35"
-                    alt="archovia logo"></a>
-            <ul class="flex mr-5">
-                <li class="mx-2 hover:bg-primary hover:text-accent font-semibold p-3"><a href="index.html">HAKKINDA</a>
-                </li>
-                <li class="mx-2 hover:bg-primary hover:text-accent font-semibold p-3"><a href="#services">HIZMETLER</a>
-                </li>
-                <li class="mx-2 hover:bg-primary hover:text-accent font-semibold p-3"><a
-                        href="portfolio.html">GALERi</a></li>
-                <li class="mx-2 hover:bg-primary hover:text-accent font-semibold p-3"><a href="#team">EKiP</a></li>
-                <li class="mx-2 hover:bg-primary hover:text-accent font-semibold p-3"><a href="blog.html">BLOG</a></li>
-            </ul>
+<body class="bg-transparent text-primary font-sans antialiased overflow-x-hidden">
+    <header>
+
+        <nav class="p-4 container mx-auto flex justify-between items-center fixed top-0 w-full z-50 bg-slate-50">
+            <div class="container mx-auto flex justify-between items-center">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="./assets/images/archovia-logo-siyah-full-color-rgb.svg" loading="lazy" width="40"
+                            alt="Archovia Logo" class="p-1 border-2 border-primary rounded-sm hover:border-slate-400">
+                    </a>
+                </div>
+                <div class="nav-links">
+                    <ul class="flex items-center space-x-4 p-3">
+                        <li><a href="index.html"
+                                class="uppercase p-2 font-semibold hover:border-b-4 hover:border-primary ">Hakkımızda</a>
+                        </li>
+                        <li><a href="about.html"
+                                class="uppercase p-2 font-semibold hover:border-b-4 hover:border-primary ">hizmetler</a>
+                        </li>
+                        <li><a href="services.html"
+                                class="uppercase p-2 font-semibold hover:border-b-4 hover:border-primary ">portföy</a>
+                        </li>
+                        <li><a href="projects.html"
+                                class="uppercase p-2 font-semibold hover:border-b-4 hover:border-primary ">ürünler</a>
+                        </li>
+                        <li><a href="contact.html"
+                                class="uppercase p-2 font-semibold hover:border-b-4 hover:border-primary ">blog</a>
+                        </li>
+                        <button>
+                            <a class="p-3 ml-8 rounded-sm bg-primary text-accent hover:border-4 hover:bg-transparent hover:text-primary"
+                                href="#contact">
+                                Teklif Alın</a>
+                        </button>
+                    </ul>
+                </div>
+            </div>
         </nav>
-    </header>
 
-    <main class="container mx-auto ">
-        <section class="hero container relative top-0 left-0 z-0">
-            <div class="hero-image w-screen ">
-                <img src="assets/images/hero.webp" loading="lazy" alt="hero image">
-            </div>
-            <div class="hero-text top-0 ml-10 w-fit text-secondary absolute z-10 translate-x-0 translate-y-32">
-                <h1 class=" text-3xl text-primary uppercase font-bold pb-5 font-title text-left">
-                    Mekanları <br>
-                    Dönüştürüyoruz</h1>
-                <h2 class="text-8xl font-bold font-title text-right uppercase">
-                    archovia
-                </h2>
-                <button class="btn btn-primary mt-4 p-3 hover:bg-primary hover:text-accent">Hizmetlere Göz Atın
-                    ></button>
-            </div>
-        </section>
-        <section class="about flex items-center justify-center h-screen relative">
-            <div class="video-container w-3/5 h-auto relative z-0 flex justify-center">
-                <video class="w-full rounded-lg" src="assets/videos/about.mp4" autoplay loop muted playsinline></video>
-            </div>
-            <div
-                class="about-text absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 text-center max-w-3xl p-12 bg-accent/50">
-                <h2 class="text-3xl font-bold text-primary uppercase pb-3">"Müşteriler ile hayal ettikleri yaşam
-                    alanları arasında duygusal bir bağ kurmak"</h2>
-                <p class="text-secondary font-body">Archovia, 2024 yılında kurulmuş olup, 17 yıldır sektörde hizmet
-                    vermektedir. Mimarlık ve iç mimarlık alanlarında uzmanlaşmış olan firmamız, müşterilerine en iyi
-                    hizmeti sunmayı hedeflemektedir. Yenilikçi ve sürdürülebilir tasarımlarımızla, mekanlarınızı
-                    dönüştürüyoruz.</p>
-            </div>
-        </section>
-    </main>
 
-    <footer class=" p-4 bg-secondary text-background">
-        <div class="container mx-auto text-center">
-            <p>&copy; 2024 Archovia. All rights reserved.</p>
-        </div>
-    </footer>
+        <main class="container mx-auto h-fit-content">
+            <section id="hero" class="container bg-primary h-screen w-full relative">
+                <img src="assets/images/hero.webp" loading="lazy" alt="hero image"
+                    class="w-full h-full object-cover absolute mix-blend-screen">
+                <div class="p-24 relative mt-24">
+                    <h1 class="text-primary text-8xl uppercase font-bold">
+                        Archovia
+                    </h1>
+                    <h2 class="text-slate-400 text-4xl font-light font-body">
+                        Hayal ettiğiniz yaşam alanları arasında <br> duygusal bir bağ kuruyoruz.
+                    </h2>
+                    <button class="pt-6">
+                        <a href="about.html"
+                            class="p-4 uppercase font-semibold border-b-4 border-primary hover:border-slate-400 hover:text-slate-400">Hizmetlerimize
+                            göz atın</a>
+                    </button>
+                </div>
+            </section>
+            <div class="relative py-4">
+                <div class="absolute inset-0 flex items-center">
+                    <div class="w-1/2  border-b-2 border-slate-700"></div>
+                </div>
+                <div class="relative flex justify-center">
+                    <span class="bg-white px-4 font-body font-semibold text-xl text-gray-500">01</span>
+                </div>
+            </div>
+            <section id="about" class="container mx-auto h-fit-content p-24">
+                <div class="grid grid-cols-2 gap-8">
+                    <div class="about-image">
+                        <img src="assets/images/about.webp" loading="lazy" alt="about image"
+                            class="w-full h-full object-cover">
+                    </div>
+                    <div class="about-content">
+                        <h2 class="text-primary text-4xl font-bold uppercase">Hakkımızda</h2>
+                        <p class="text-slate-700 text-lg font-light font-body pt-4">
+                            Archovia, 2024 yılında kurulmuş olup, 20 yıldır sektörde hizmet vermektedir. Müşteri
+                            memnuniyeti
+                            odaklı çalışan firmamız, her zaman en iyi hizmeti sunmayı hedeflemektedir. Müşterilerimizin
+                            hayallerini gerçeğe dönüştürmek için çalışıyoruz.
+                        </p>
+                        <button class="pt-6">
+                            <a href="about.html"
+                                class="p-4 uppercase font-semibold border-b-4 border-primary hover:border-slate-400 hover:text-slate-400">Daha
+                                fazla bilgi ></a>
+                        </button>
+                    </div>
+            </section>
+            <div class="relative py-4">
+                <div class="absolute inset-0 flex items-center">
+                    <div class="w-1/2  border-b-2 border-slate-700"></div>
+                </div>
+                <div class="relative flex justify-center">
+                    <span class="bg-white px-4 font-body font-semibold text-xl text-gray-500">02</span>
+                </div>
+            </div>
+            <section id="services" class="container mx-auto h-fit-content p-24">
+                <div class="grid grid-cols-2 gap-8">
+                    <div class="services-content">
+                        <h2 class="text-primary text-4xl font-bold uppercase">Hizmetlerimiz</h2>
+                        <p class="text-slate-700 text-lg font-light font-body pt-4">
+                            Archovia, müşterilerine en iyi hizmeti sunmayı hedeflemektedir. Müşteri memnuniyeti odaklı
+                            çalışan firmamız, her zaman en iyi hizmeti sunmayı hedeflemektedir. Müşterilerimizin
+                            hayallerini
+                            gerçeğe dönüştürmek için çalışıyoruz.
+                        </p>
+                        <button class="pt-6">
+                            <a href="services.html"
+                                class="p-4 uppercase font-semibold border-b-4 border-primary hover:border-slate-400 hover:text-slate-400">Hizmetlerimize
+                                göz atın ></a>
+                        </button>
+                    </div>
+                    <div class="services-video">
+                        <video src="assets/videos/about.mp4" autoplay loop muted alt="services video"
+                            class="w-full h-full object-cover">
+                    </div>
 
-    <!-- Scripts -->
-    <script src="./scripts/main.js"></script>
+
+            </section>
+            <div class="relative py-4">
+                <div class="absolute inset-0 flex items-center">
+                    <div class="w-1/2  border-b-2 border-slate-700"></div>
+                </div>
+                <div class="relative flex justify-center">
+                    <span class="bg-white px-4 font-body font-semibold text-xl text-gray-500">03</span>
+                </div>
+            </div>
+        </main>
+
+        <footer class=" p-4 bg-secondary text-background w-full bottom-0 ">
+            <div class="container mx-auto text-center">
+                <p>&copy; 2024 Archovia. All rights reserved.</p>
+            </div>
+        </footer>
+
+        <!-- Scripts -->
+        <script src="./scripts/main.js"></script>
 </body>
 
 </html>
