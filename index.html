@@ -21,15 +21,16 @@
         rel="stylesheet">
 </head>
 
-<body class="bg-transparent text-primary font-sans antialiased overflow-x-hidden">
+<body class="bg-accent text-primary font-sans antialiased overflow-x-hidden">
     <!-- Header -->
     <header class="relative md:flex md:justify-between md:items-center">
-        <nav class=" p-4 container mx-auto flex justify-between items-center fixed top-0 w-full z-50 bg-slate-50">
+        <nav
+            class=" p-4 container mx-auto flex justify-between items-center fixed top-0 w-full z-50 bg-slate-50 bg-opacity-35">
 
             <div class="logo">
                 <a href="index.html">
                     <img src="./assets/images/archovia-logo-siyah-full-color-rgb.svg" loading="lazy" width="40"
-                        alt="Archovia Logo" class="p-1 border-2 border-primary rounded-sm hover:border-slate-400">
+                        alt="Archovia Logo" class="p-1 pt-8 border-2 bg-accent hover:border-slate-400">
                 </a>
             </div>
             <!-- Hamburger Menu Button -->
@@ -42,19 +43,19 @@
             <!-- Navigation Links -->
             <div id="nav-menu" class="hidden md:flex flex-col md:flex-row md:items-center">
                 <ul class="flex flex-col md:flex-row md:items-center md:space-x-4 p-3">
-                    <li><a href="index.html"
+                    <li><a href="#about"
                             class="uppercase p-2 font-body font-medium hover:border-b-4 hover:border-primary ">Hakkımızda
                             <span class="text-slate-600 text-xs font-body">01</span></a></li>
-                    <li><a href="about.html"
+                    <li><a href="#services"
                             class="uppercase p-2 font-body font-medium hover:border-b-4 hover:border-primary ">Hizmetler
                             <span class="text-slate-600 text-xs font-body">02</span></a></li>
-                    <li><a href="services.html"
+                    <li><a href="#projects"
                             class="uppercase p-2 font-body font-medium hover:border-b-4 hover:border-primary ">Portföy
                             <span class="text-slate-600 text-xs font-body">03</span></a></li>
-                    <li><a href="projects.html"
+                    <li><a href="#products"
                             class="uppercase p-2 font-body font-medium hover:border-b-4 hover:border-primary ">Ürünler
                             <span class="text-slate-600 text-xs font-body">04</span></a></li>
-                    <li><a href="contact.html"
+                    <li><a href="#blog"
                             class="uppercase p-2 font-body font-medium hover:border-b-4 hover:border-primary ">Blog
                             <span class="text-slate-600 text-xs font-body">05</span></a></li>
                     <li class="contact sm:hidden"></li>
@@ -70,7 +71,7 @@
     <!-- Main Content -->
     <main class="container mx-auto h-fit-content px-4 sm:px-6 lg:px-8">
         <!-- Hero Section -->
-        <section id="hero" class="relative h-screen flex flex-col items-center justify-center bg-primary">
+        <section id="hero" class="relative w-full h-screen flex flex-col items-center justify-center bg-primary">
             <video src="assets/videos/bungalow.mp4" autoplay loop muted alt="Hero Image"
                 class="absolute w-full h-full object-cover mix-blend-screen"></video>
             <div class="relative z-10 text-center text-accent p-8 bg-slate-300 bg-opacity-0 rounded-sm">
@@ -91,7 +92,7 @@
                 <div class="w-1/2 border-b-2 border-slate-700"></div>
             </div>
             <div class="relative flex justify-center">
-                <span class="bg-white px-4 font-body font-semibold text-xl text-gray-500">01</span>
+                <span class="bg-accent px-4 font-body font-semibold text-xl text-gray-500">01</span>
             </div>
         </div>
 
@@ -124,7 +125,7 @@
                 <div class="w-1/2 border-b-2 border-slate-700"></div>
             </div>
             <div class="relative flex justify-center">
-                <span class="bg-white px-4 font-body font-semibold text-xl text-gray-500">02</span>
+                <span class="bg-accent px-4 font-body font-semibold text-xl text-gray-500">02</span>
             </div>
         </div>
 
@@ -159,7 +160,7 @@
                 <div class="w-1/2 border-b-2 border-slate-700"></div>
             </div>
             <div class="relative flex justify-center">
-                <span class="bg-white px-4 font-body font-semibold text-xl text-gray-500">03</span>
+                <span class="bg-accent px-4 font-body font-semibold text-xl text-gray-500">03</span>
             </div>
         </div>
 
@@ -219,7 +220,7 @@
                 <div class="w-1/2  border-b-2 border-slate-700"></div>
             </div>
             <div class="relative flex justify-center">
-                <span class="bg-white px-4 font-body font-semibold text-xl text-gray-500">04</span>
+                <span class="bg-accent px-4 font-body font-semibold text-xl text-gray-500">04</span>
             </div>
         </div>
         <!-- PRODUCTS -->
@@ -277,7 +278,7 @@
                 <div class="w-1/2  border-b-2 border-slate-700"></div>
             </div>
             <div class="relative flex justify-center">
-                <span class="bg-white px-4 font-body font-semibold text-xl text-gray-500">05</span>
+                <span class="bg-accent px-4 font-body font-semibold text-xl text-gray-500">05</span>
             </div>
         </div>
         <!-- BLOG -->
@@ -303,7 +304,7 @@
                 <div class="w-1/2  border-b-2 border-slate-700"></div>
             </div>
             <div class="relative flex justify-center">
-                <span class="bg-white uppercase px-4 font-body font-semibold text-xl text-gray-500">Hazır
+                <span class="bg-accent uppercase px-4 font-body font-semibold text-xl text-gray-500">Hazır
                     Mısınız?</span>
             </div>
         </div>
