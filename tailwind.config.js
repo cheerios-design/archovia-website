@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./*.html", "./scripts/**/*.js", "./node_modules/flowbite/**/*.js"], // Updated the folder name to 'scripts'
+  content: ["./*.html", "./scripts/**/*.js", "./node_modules/flowbite/**/*.js"],
   theme: {
     extend: {
       colors: {
@@ -10,15 +10,15 @@ module.exports = {
         background: "#fefefe",
       },
       fontFamily: {
-        title: ["Montserrat", "sans-serif"], // For titles
-        body: ["Poppins", "sans-serif"], // For body text
-        accent: ["Roboto", "sans-serif"], // Replace with your chosen accent font
+        title: ["Montserrat", "sans-serif"],
+        body: ["Poppins", "sans-serif"],
+        accent: ["Roboto", "sans-serif"],
       },
     },
   },
   plugins: [
     require("@tailwindcss/typography"),
     require("@tailwindcss/forms"),
-    require(flowbite / plugin),
+    require("flowbite/plugin"),
   ],
 };
