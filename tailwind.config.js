@@ -1,5 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  purge: [
+    "./src/**/*.html",
+    "./src/**/*.js",
+    // Add other paths as needed
+  ],
   content: ["./*.html", "./scripts/**/*.js", "./node_modules/flowbite/**/*.js"],
   theme: {
     extend: {
@@ -16,11 +21,10 @@ module.exports = {
       },
     },
   },
-
   plugins: [
     require("@tailwindcss/typography"),
     require("@tailwindcss/forms"),
     require("flowbite/plugin"),
-    require("tailwindcss-motion"),
+    require("tailwindcss-motion")(),
   ],
 };
