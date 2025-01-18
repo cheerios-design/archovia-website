@@ -6,7 +6,7 @@ module.exports = {
       colors: {
         primary: "#232323",
         secondary: "#151515",
-        accent: "#f3f3f3",
+        accent: "#f1f1f1",
         background: "#fefefe",
       },
       fontFamily: {
@@ -16,6 +16,7 @@ module.exports = {
       },
     },
   },
+
   plugins: [
     require("@tailwindcss/typography"),
     require("@tailwindcss/forms"),
