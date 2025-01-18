@@ -44,7 +44,7 @@
                                 d="m13 19 3.5-9 3.5 9m-6.125-2h5.25M3 7h7m0 0h2m-2 0c0 1.63-.793 3.926-2.239 5.655M7.5 6.818V5m.261 7.655C6.79 13.82 5.521 14.725 4 15m3.761-2.345L5 10m2.761 2.655L10.2 15" />
                         </svg>
                     </a>
-                    <a href="https://archovia.com/contact" class="text-slate-800 hover:bg-primary hover:text-accent focus:ring-4 focus:ring-primary
+                    <a href="https://archovia.com/#contact" class="text-slate-800 hover:bg-primary hover:text-accent focus:ring-4 focus:ring-primary
                      font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2   focus:outline-none">İletişime
                         Geçin</a>
                     <button data-collapse-toggle="mobile-menu-2" type="button"
@@ -353,28 +353,38 @@
                     Mısınız?</span>
             </div>
         </div>
-        <section id="cta" class="container mx-auto w-full h-full p-12 bg-slate-300 bg-opacity-15 relative">
-            <div class="cta-content relative">
-                <video src="assets/videos/handshake.mp4" autoplay loop muted loading="lazy" alt="handshake video"
-                    class="w-full h-52 object-cover rounded-sm mix-blend-normal">
-                </video>
-                <h2
-                    class="absolute inset-0 flex items-center justify-center text-accent text-3xl md:text-4xl font-bold uppercase z-10">
-                    yeni projeye başlayalım
-                </h2>
-            </div>
-            <div class="form container mx-auto p-8 bg-slate-300 bg-opacity-50 rounded-sm" id="contact">
-                <form action="" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <input type="text" name="name" id="name" placeholder="Adınız" required
-                        class="p-4 border-2 border-slate-700 rounded-sm">
-                    <input type="email" name="email" id="email" placeholder="E-posta Adresiniz" required
-                        class="p-4 border-2 border-slate-700 rounded-sm">
-                    <input type="tel" name="phone" id="phone" placeholder="Telefon Numaranız" required
-                        class="p-4 border-2 border-slate-700 rounded-sm">
-                    <textarea name="message" id="message" placeholder="Mesajınız" required
-                        class="p-4 border-2 border-slate-700 rounded-sm"></textarea>
+        <section class="bg-white dark:bg-gray-900" id="contact">
+            <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
+                <h2 class="mb-4 text-4xl uppercase font-title font-extrabold text-center text-gray-900 dark:text-white">
+                    bir teklif alın</h2>
+                <p class="mb-8 lg:mb-16 font-normal font-body text-center text-gray-500 sm:text-xl">
+                    Şimdi
+                    bizimle iletişime geçerek profesyonel destek alın ve projelerinizi gerçeğe dönüştürmenin ilk adımını
+                    atın.</p>
+                <form action="#" class="space-y-8">
+                    <div>
+                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Email Adresiniz</label>
+                        <input type="email" id="email"
+                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
+                            placeholder="name@email.com" required>
+                    </div>
+                    <div>
+                        <label for="subject"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Konu</label>
+                        <input type="text" id="subject"
+                            class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
+                            placeholder="Size Nasıl Yardım Edebiliriz?" required>
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label for="message"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Mesajiniz</label>
+                        <textarea id="message" rows="6"
+                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            placeholder="Bir mesaj bırakınız.."></textarea>
+                    </div>
                     <button type="submit"
-                        class="p-4 bg-white text-primary uppercase font-semibold hover:bg-slate-700 hover:text-accent">Gönder</button>
+                        class="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Send
+                        message</button>
                 </form>
             </div>
         </section>
