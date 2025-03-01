@@ -1,25 +1,7 @@
 {
-  "name": "archovia",
-  "version": "1.0.0",
-  "description": "",
-  "main": "tailwind.config.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tailwindcss -i ./src/input.css -o ./styles/output.css"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "autoprefixer": "^10.4.20",
-    "postcss": "^8.4.49",
-    "tailwindcss": "^3.4.17",
-    "tailwindcss-motion": "^1.0.1"
-  },
   "dependencies": {
-    "@tailwindcss/forms": "^0.5.9",
-    "@tailwindcss/typography": "^0.5.15",
-    "flowbite": "^2.5.2"
-  },
-  "packageManager": "pnpm@9.15.4+sha512.b2dc20e2fc72b3e18848459b37359a32064663e5627a51e4c74b2c29dd8e8e0491483c3abb40789cfd578bf362fb6ba8261b05f0387d76792ed6e23ea3b1b6a0"
+    "@tailwindcss/cli": "^4.0.9",
+    "flowbite": "^3.1.2",
+    "tailwindcss": "^4.0.9"
+  }
 }

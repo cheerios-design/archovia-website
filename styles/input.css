@@ -1,0 +1,27 @@
+@import "tailwindcss";
+@import "flowbite/src/themes/default";
+
+:root {
+  --font-title: "Montserrat", sans-serif;
+  --font-body: "Poppins", sans-serif;
+  --font-accent: "Roboto", sans-serif;
+  --color-primary: #232323;
+  --color-secondary: #151515;
+  --color-accent: #f1f1f1;
+  --color-background: #fefefe;
+}
+
+/* .font-title {
+  font-family: var(--font-title);
+  font-weight: 800;
+}
+
+.font-body {
+  font-family: var(--font-body);
+  font-weight: 500;
+}
+
+.font-accent {
+  font-family: var(--font-accent);
+  font-weight: 600;
+} */
