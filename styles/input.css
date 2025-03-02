@@ -1,27 +1,58 @@
-@import "tailwindcss";
 @import "flowbite/src/themes/default";
+@import "tailwindcss";
 
-:root {
-  --font-title: "Montserrat", sans-serif;
-  --font-body: "Poppins", sans-serif;
-  --font-accent: "Roboto", sans-serif;
-  --color-primary: #232323;
-  --color-secondary: #151515;
-  --color-accent: #f1f1f1;
-  --color-background: #fefefe;
+/* Define custom variables inside @layer base */
+@layer base {
+  :root {
+    --font-title: "Montserrat", sans-serif;
+    --font-body: "Poppins", sans-serif;
+    --font-accent: "Roboto", sans-serif;
+    --color-primary: #232323;
+    --color-secondary: #151515;
+    --color-accent: #f1f1f1;
+    --color-background: #fefefe;
+  }
 }
 
-/* .font-title {
-  font-family: var(--font-title);
-  font-weight: 800;
-}
+/* Custom classes in @layer components */
+@layer components {
+  .font-title {
+    font-family: var(--font-title);
+    font-weight: 800;
+  }
 
-.font-body {
-  font-family: var(--font-body);
-  font-weight: 500;
-}
+  .font-body {
+    font-family: var(--font-body);
+    font-weight: 500;
+  }
 
-.font-accent {
-  font-family: var(--font-accent);
-  font-weight: 600;
-} */
+  .font-accent {
+    font-family: var(--font-accent);
+    font-weight: 600;
+  }
+
+  .text-primary {
+    color: var(--color-primary);
+  }
+
+  .text-secondary {
+    color: var(--color-secondary);
+  }
+
+  .text-accent {
+    color: var(--color-accent);
+  }
+
+  .bg-background {
+    background-color: var(--color-background);
+  }
+
+  .bg-primary {
+    background-color: var(--color-primary);
+  }
+
+  .bg-secondary {
+    background-color: var(--color-secondary);
+  }
+
+}
