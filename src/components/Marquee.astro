@@ -1,0 +1,28 @@
+---
+/* Infinite ticker band. Speed and direction follow the scroll (see motion.ts). */
+import Icon from "./Icons.astro";
+
+interface Props {
+  items: string[];
+  tone?: "ink" | "paper";
+}
+const { items, tone = "ink" } = Astro.props;
+---
+
+<div
+  class:list={["overflow-hidden py-5 md:py-7", tone === "ink" ? "bg-ink text-paper" : "bg-paper text-ink"]}
+  data-marquee
+  role="marquee"
+  aria-label={items.join(", ")}
+>
+  <div class="marquee-track" aria-hidden="true">
+    <div class="flex shrink-0 items-center">
+      {items.map((item) => (
+        <span class="flex items-center">
+          <span class="display px-6 text-4xl tracking-tight whitespace-nowrap md:px-10 md:text-7xl">{item}</span>
+          <Icon name="asterisk" class:list={["size-8 shrink-0 md:size-12", tone === "ink" ? "text-brand-light" : "text-brand"]} />
+        </span>
+      ))}
+    </div>
+  </div>
+</div>

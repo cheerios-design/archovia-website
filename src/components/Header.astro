@@ -1,0 +1,76 @@
+---
+import Icon from "./Icons.astro";
+import { nav } from "../data/site";
+
+const path = Astro.url.pathname.replace(/\/$/, "/index.html");
+---
+
+<header class="site-header sticky top-0 z-50 bg-ink px-frame pt-frame">
+  <nav class="flex items-center justify-between gap-6 border-b border-ink-3 pb-3 text-paper" aria-label="Ana menü">
+    <a href="/" class="flex items-center gap-3" aria-label="Archovia ana sayfa">
+      <Icon name="logo" class="h-8 w-auto" />
+      <span lang="en" class="display text-lg tracking-[0.08em]">Archovia</span>
+    </a>
+
+    <ul class="hidden items-center gap-8 md:flex">
+      {nav.map((item) => {
+        const active = path.endsWith(item.href);
+        return (
+          <li>
+            <a
+              href={item.href}
+              aria-current={active ? "page" : undefined}
+              class:list={[
+                "group flex items-baseline gap-1.5 font-display text-sm font-medium uppercase tracking-[0.1em] transition-colors",
+                active ? "text-paper" : "text-concrete hover:text-paper",
+              ]}
+            >
+              <span class:list={["text-[0.65rem]", active && "text-brand-light"]}>{item.index}</span>
+              <span class="roll"><span>{item.label}</span><span aria-hidden="true">{item.label}</span></span>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+
+    <a href="/contact.html" data-magnetic="0.25" class="hidden rounded-full bg-paper px-5 py-2 font-display text-sm font-semibold uppercase tracking-[0.08em] text-ink transition-colors hover:bg-brand hover:text-paper md:inline-flex">
+      <span class="roll"><span>Teklif Alın</span><span aria-hidden="true">Teklif Alın</span></span>
+    </a>
+
+    <button
+      id="menu-toggle"
+      type="button"
+      class="group grid size-11 place-items-center md:hidden"
+      aria-controls="mobile-menu"
+      aria-expanded="false"
+    >
+      <span class="sr-only">Menüyü aç</span>
+      <Icon name="menu" class="size-6 group-aria-expanded:hidden" />
+      <Icon name="close" class="hidden size-6 group-aria-expanded:block" />
+    </button>
+  </nav>
+
+  <div id="mobile-menu" class="hidden md:hidden">
+    <ul class="flex flex-col py-6">
+      {nav.map((item) => (
+        <li class="border-b border-ink-3">
+          <a href={item.href} class="flex items-baseline justify-between py-4 text-paper">
+            <span class="display text-4xl tracking-tight">{item.label}</span>
+            <span class="font-display text-xs text-concrete">{item.index}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById("menu-toggle")!;
+  const menu = document.getElementById("mobile-menu")!;
+  toggle.addEventListener("click", () => {
+    const open = toggle.getAttribute("aria-expanded") === "true";
+    toggle.setAttribute("aria-expanded", String(!open));
+    menu.classList.toggle("hidden", open);
+    document.body.classList.toggle("overflow-hidden", !open);
+  });
+</script>

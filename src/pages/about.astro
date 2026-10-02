@@ -1,0 +1,56 @@
+---
+import { Image } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import Plate from "../components/Plate.astro";
+import { images, site } from "../data/site";
+
+const pillars = [
+  {
+    label: "Misyon",
+    title: "Değer yaratan tasarımlar, sürdürülebilir çözümler",
+    body: "Hayal ettiğiniz yaşam alanlarını gerçeğe dönüştürürken estetik, işlevsellik ve sürdürülebilirliği bir araya getiriyoruz. Şeffaf fiyat politikamız ve müşteri odaklı yaklaşımımızla her detayı ihtiyaçlarınıza göre tasarlıyoruz.",
+  },
+  {
+    label: "Vizyon",
+    title: "Mimarlıkta yeni bir standart",
+    body: "Global ölçekte ilham veren, erişilebilir ve yenilikçi mimarlık çözümleriyle sektörde yeni bir standart oluşturmak. Her gelir seviyesine uygun çözümlerle kapsayıcı bir yaklaşım benimsiyoruz.",
+  },
+];
+---
+
+<Base title="Hakkımızda" description="Archovia'nın hikâyesi, misyonu ve vizyonu.">
+  <Plate
+    as="h1"
+    title="Stüdyo"
+    subtitle="Mekânlarınıza<br />değer katıyoruz"
+    note="Konut ve ticari alan tasarımlarında yenilikçi ve sürdürülebilir çözümler; mimari tasarımdan danışmanlığa geniş bir yelpazede profesyonel destek."
+    meta={`${site.founded} —`}
+  >
+    <Fragment slot="media">
+      <Image src={images.about2} alt="Doğayla iç içe bir Archovia bungalovu" widths={[800, 1600, 2400]} sizes="100vw" class="h-[60vh] w-full object-cover" />
+    </Fragment>
+  </Plate>
+
+  {pillars.map((p, i) => (
+    <section class="px-frame" data-fade>
+      <div class:list={["grid gap-8 px-5 py-14 sm:px-8 md:grid-cols-12 md:px-12 md:py-20", i % 2 ? "plate-dark" : "plate"]}>
+        <p class:list={["eyebrow md:col-span-3", i % 2 ? "text-concrete" : "text-concrete-dark"]}>(0{i + 1}) {p.label}</p>
+        <div class="md:col-span-9">
+          <h2 class="display text-4xl leading-[0.95] tracking-tight md:text-6xl" data-split>{p.title}</h2>
+          <p class:list={["mt-8 max-w-2xl text-lg leading-relaxed", i % 2 ? "text-paper/70" : "text-concrete-dark"]}>{p.body}</p>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="grid gap-frame px-frame md:grid-cols-2" data-fade>
+    <Image src={images.about1} alt="Bungalov iç mekânı" widths={[600, 1200]} sizes="(min-width: 768px) 50vw, 100vw" class="aspect-[4/5] w-full object-cover" />
+    <div class="plate flex flex-col justify-between p-8 md:p-12">
+      <p class="eyebrow text-concrete-dark">(03) Yaklaşım</p>
+      <p class="font-display text-3xl leading-tight tracking-tight md:text-5xl">
+        Her proje, orada yaşayacak insanla kurulan bir <span class="accent">diyalogdur.</span>
+      </p>
+      <a href="/contact.html" class="link-arrow mt-8">Bir görüşme planlayın →</a>
+    </div>
+  </section>
+</Base>

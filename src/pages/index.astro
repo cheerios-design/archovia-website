@@ -1,0 +1,171 @@
+---
+import { Image } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import Plate from "../components/Plate.astro";
+import Marquee from "../components/Marquee.astro";
+import Icon from "../components/Icons.astro";
+import { images, projects, products, services, site } from "../data/site";
+---
+
+<Base>
+  <Plate
+    as="h1"
+    size="mega"
+    title="<span lang='en'>Archovia</span>"
+    subtitle="Mimarlık, iç mimarlık<br />ve ürün tasarımı stüdyosu"
+    note="Konut ve ticari alanlarda yenilikçi, sürdürülebilir ve zamansız mekânlar tasarlıyoruz. Her çizgi, orada yaşayacak insanla kurulan bir bağdan doğar."
+    meta={`Est. ${site.founded}`}
+    href="/portfolio.html"
+    cursor="Projeler"
+  >
+    <Fragment slot="media">
+      <video
+        class="aspect-[4/5] w-full object-cover sm:aspect-[16/9] lg:aspect-[21/9]"
+        src="/videos/bungalow.mp4"
+        poster={images.hero.src}
+        muted
+        loop
+        playsinline
+        preload="none"
+        data-autoplay
+        aria-hidden="true"
+      ></video>
+    </Fragment>
+  </Plate>
+
+  <Marquee items={services.map((s) => s.title)} />
+
+  <!-- Manifesto -->
+  <section class="px-frame">
+    <div class="plate-dark grid gap-10 px-5 py-16 sm:px-8 md:grid-cols-12 md:px-12 md:py-28">
+      <p class="eyebrow text-concrete md:col-span-3" data-fade>(01) Hakkımızda</p>
+      <div class="md:col-span-9">
+        <p class="font-display text-3xl leading-[1.05] font-medium tracking-tight md:text-5xl lg:text-6xl" data-split>
+          Hayal ettiğiniz yaşam alanları arasında
+          <span class="accent text-brand-light">duygusal</span> bir bağ kuruyoruz.
+        </p>
+        <div class="mt-12 grid gap-8 text-paper/70 sm:grid-cols-2" data-fade>
+          <p>
+            Archovia, yirmi yılı aşkın saha ve tasarım deneyimini {site.founded}'te tek bir stüdyo çatısı altında
+            topladı. Müşterilerimizin hayallerini, yaşanabilir ve sürdürülebilir mekânlara dönüştürüyoruz.
+          </p>
+          <a href="/about.html" class="link-arrow self-end justify-self-start text-paper hover:text-brand-light">
+            Stüdyoyu tanıyın <Icon name="arrow" class="size-5" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="px-frame">
+    <div class="plate px-5 py-14 sm:px-8 md:px-12 md:py-20">
+      <div class="flex items-end justify-between gap-6">
+        <h2 class="display text-huge" data-split>Hizmetler</h2>
+        <p class="eyebrow hidden text-concrete-dark sm:block" data-fade>(02)</p>
+      </div>
+      <ul class="mt-12 border-t border-ink" data-stagger>
+        {services.map((s) => (
+          <li class="wipe-row grid grid-cols-[3rem_1fr] gap-x-4 gap-y-2 border-b border-ink px-2 py-6 md:grid-cols-12 md:py-8">
+            <span class="font-display text-sm text-concrete-dark md:col-span-1">{s.no}</span>
+            <h3 class="display text-2xl tracking-tight md:col-span-5 md:text-4xl">{s.title}</h3>
+            <p class="col-start-2 max-w-md text-concrete-dark md:col-span-5 md:col-start-auto">{s.body}</p>
+            <span class="hidden justify-end md:col-span-1 md:flex">
+              <Icon name="arrow" class="size-6" />
+            </span>
+          </li>
+        ))}
+      </ul>
+      <a href="/services.html" class="link-arrow mt-10" data-fade>Tüm hizmetler <Icon name="arrow" class="size-5" /></a>
+    </div>
+  </section>
+
+  <!-- Selected work -->
+  <section class="px-frame">
+    <div class="flex items-end justify-between bg-ink px-1 pt-14 pb-6 text-paper md:pt-24">
+      <h2 class="display text-huge" data-split>Seçili<br /><span class="accent">işler</span></h2>
+      <a href="/portfolio.html" class="link-arrow hover:text-brand-light" data-fade>Portföy <Icon name="arrow" class="size-5" /></a>
+    </div>
+    <div class="grid gap-frame md:grid-cols-3">
+      {projects.map((p, i) => (
+        <a
+          href="/portfolio.html"
+          class:list={["group block bg-paper", i === 1 && "md:mt-28", i === 2 && "md:mt-10"]}
+          data-skew
+          data-fade
+          data-cursor="İncele"
+        >
+          <div class="overflow-hidden">
+            <div data-parallax="0.1">
+              <Image
+                src={p.image}
+                alt={`${p.title} — ${p.type} projesi`}
+                widths={[480, 800, 1200]}
+                sizes="(min-width: 768px) 33vw, 100vw"
+                class="aspect-[4/5] w-full object-cover grayscale transition duration-1000 ease-out-expo group-hover:scale-105 group-hover:grayscale-0"
+              />
+            </div>
+          </div>
+          <div class="flex items-baseline justify-between gap-4 px-4 py-4">
+            <span class="font-display text-sm text-concrete-dark">{p.no}</span>
+            <span class="display flex-1 text-lg tracking-tight transition-transform duration-500 ease-out-expo group-hover:translate-x-2">{p.title}</span>
+            <span class="font-display text-sm">{p.year}</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section class="px-frame">
+    <div class="plate-dark px-5 py-14 sm:px-8 md:px-12 md:py-24">
+      <div class="grid gap-6 md:grid-cols-12">
+        <p class="eyebrow text-concrete md:col-span-3" data-fade>(04) Ürünler</p>
+        <p class="font-display text-2xl leading-tight tracking-tight md:col-span-8 md:text-4xl" data-split>
+          Mekânın tamamlayıcısı: yaşam alanlarınız için özenle tasarlanmış
+          <span class="accent">mobilya ve obje</span> koleksiyonu.
+        </p>
+      </div>
+      <div class="mt-14 grid gap-4 sm:grid-cols-3" data-stagger>
+        {products.map((p) => (
+          <figure class="group" data-cursor="Ürün">
+            <div class="overflow-hidden">
+              <video
+                class="aspect-[3/4] w-full bg-ink-3 object-cover transition-transform duration-1000 ease-out-expo group-hover:scale-105"
+                src={p.video}
+                muted
+                loop
+                playsinline
+                preload="none"
+                data-autoplay
+                aria-hidden="true"
+              ></video>
+            </div>
+            <figcaption class="mt-3 flex items-center gap-2 font-display text-sm tracking-[0.12em] uppercase">
+              <Icon name="asterisk" class="size-3.5 text-brand-light transition-transform duration-700 group-hover:rotate-90" /> {p.title}
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Plate
+    title="Teklif<br />alın"
+    subtitle="Projenizi birlikte<br />gerçeğe dönüştürelim"
+    note="Ölçüler, bütçe, zaman çizelgesi — hepsini ilk görüşmede netleştirelim. Şeffaf fiyat, gizli kalem yok."
+    meta={site.email}
+    href="/contact.html"
+    cursor="Yazın"
+  >
+    <Fragment slot="media">
+      <Image
+        src={images.about}
+        alt="Archovia imzalı bir cephenin aşağıdan görünümü"
+        widths={[800, 1600, 2400]}
+        sizes="100vw"
+        class="h-[60vh] w-full object-cover object-top grayscale"
+      />
+    </Fragment>
+  </Plate>
+</Base>

@@ -1,0 +1,84 @@
+---
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icons.astro";
+import { site } from "../data/site";
+
+const field =
+  "peer w-full border-0 border-b-2 border-ink bg-transparent px-0 pt-7 pb-3 font-display text-xl placeholder-transparent focus:border-ink focus:ring-0 focus:outline-none";
+const label =
+  "eyebrow pointer-events-none absolute top-0 left-0 text-concrete-dark transition-all peer-placeholder-shown:top-7 peer-placeholder-shown:text-base peer-placeholder-shown:normal-case peer-placeholder-shown:tracking-normal peer-focus:top-0 peer-focus:text-xs peer-focus:uppercase peer-focus:tracking-[0.18em]";
+---
+
+<Base title="İletişim" description="Archovia ile projeniz hakkında konuşun.">
+  <section class="px-frame">
+    <div class="plate grid gap-12 px-5 py-10 sm:px-8 md:grid-cols-12 md:px-12 md:py-14">
+      <div class="md:col-span-5">
+        <h1 class="display text-huge" data-split="load">Teklif<br />alın</h1>
+        <div class="mt-10 flex gap-4">
+          <Icon name="asterisk" class="size-7 shrink-0" />
+          <p class="max-w-sm text-concrete-dark">
+            Hayal ettiğiniz projeyi birlikte gerçekleştirmek için buradayız. Bize projenizi anlatın, ilk adımı birlikte
+            planlayalım.
+          </p>
+        </div>
+        <a href={`mailto:${site.email}`} class="mt-10 inline-block font-display text-2xl tracking-tight underline decoration-2 underline-offset-8 hover:decoration-concrete">
+          {site.email}
+        </a>
+      </div>
+
+      <form id="contact-form" class="flex flex-col gap-8 md:col-span-6 md:col-start-7" action={site.formEndpoint || undefined} method="post" data-email={site.email}>
+        <div class="relative">
+          <input class={field} id="name" name="name" type="text" placeholder="Adınız" autocomplete="name" required />
+          <label class={label} for="name">Adınız</label>
+        </div>
+        <div class="relative">
+          <input class={field} id="email" name="email" type="email" placeholder="E-posta" autocomplete="email" required />
+          <label class={label} for="email">E-posta</label>
+        </div>
+        <div class="relative">
+          <input class={field} id="subject" name="subject" type="text" placeholder="Konu" required />
+          <label class={label} for="subject">Konu</label>
+        </div>
+        <div class="relative">
+          <textarea class={`${field} resize-none`} id="message" name="message" rows="5" placeholder="Mesajınız" required></textarea>
+          <label class={label} for="message">Mesajınız</label>
+        </div>
+        <button type="submit" class="group inline-flex items-center justify-between gap-6 self-start rounded-full bg-ink py-4 pr-4 pl-8 font-display font-semibold uppercase tracking-[0.1em] text-paper transition-colors hover:bg-ink-3">
+          Gönder
+          <span class="grid size-9 place-items-center rounded-full bg-brand text-paper">
+            <Icon name="arrow" class="size-4 transition-transform group-hover:rotate-45" />
+          </span>
+        </button>
+        <p id="form-status" class="font-display text-sm" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</Base>
+
+<script>
+  const form = document.getElementById("contact-form") as HTMLFormElement;
+  const status = document.getElementById("form-status")!;
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const endpoint = form.getAttribute("action");
+
+    // No backend configured: hand off to the visitor's email client.
+    if (!endpoint) {
+      const body = `${data.get("message")}\n\n— ${data.get("name")} <${data.get("email")}>`;
+      location.href = `mailto:${form.dataset.email}?subject=${encodeURIComponent(String(data.get("subject")))}&body=${encodeURIComponent(body)}`;
+      return;
+    }
+
+    status.textContent = "Gönderiliyor…";
+    try {
+      const res = await fetch(endpoint, { method: "POST", body: data, headers: { Accept: "application/json" } });
+      if (!res.ok) throw new Error();
+      form.reset();
+      status.textContent = "Teşekkürler — mesajınız bize ulaştı.";
+    } catch {
+      status.textContent = "Bir sorun oluştu. Lütfen doğrudan e-posta ile yazın.";
+    }
+  });
+</script>

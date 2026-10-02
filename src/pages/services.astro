@@ -1,0 +1,54 @@
+---
+import { Image } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import Plate from "../components/Plate.astro";
+import Icon from "../components/Icons.astro";
+import { images, services } from "../data/site";
+
+const steps = ["Keşif & brif", "Konsept", "Uygulama projesi", "Saha & teslim"];
+---
+
+<Base title="Hizmetler" description="Mimari tasarım, iç mimarlık, danışmanlık ve sürdürülebilir çözümler.">
+  <Plate
+    as="h1"
+    title="Hizmetler"
+    subtitle="Konseptten anahtar<br />teslimine kadar"
+    note="Mimari tasarımdan danışmanlık hizmetlerine kadar geniş bir yelpazede, tek bir ekip ve tek bir vizyonla çalışıyoruz."
+    meta={`0${services.length} disiplin`}
+  >
+    <Fragment slot="media">
+      <Image src={images.hero} alt="Archovia projesinden bir cephe detayı" widths={[800, 1600, 2400]} sizes="100vw" class="h-[50vh] w-full object-cover grayscale" />
+    </Fragment>
+  </Plate>
+
+  <section class="grid gap-frame px-frame md:grid-cols-2">
+    {services.map((s) => (
+      <article class="plate flex min-h-[22rem] flex-col justify-between p-8 md:p-12" data-fade>
+        <div class="flex items-start justify-between">
+          <span class="font-display text-6xl font-bold tracking-tighter md:text-8xl">{s.no}</span>
+          <Icon name="asterisk" class="size-8" />
+        </div>
+        <div>
+          <h2 class="display text-3xl tracking-tight md:text-4xl">{s.title}</h2>
+          <p class="mt-4 max-w-md text-concrete-dark">{s.body}</p>
+        </div>
+      </article>
+    ))}
+  </section>
+
+  <section class="px-frame">
+    <div class="plate-dark px-5 py-14 sm:px-8 md:px-12 md:py-20">
+      <h2 class="display text-huge" data-split>Süreç</h2>
+      <ol class="mt-12 grid gap-px bg-ink-3 sm:grid-cols-2 lg:grid-cols-4" data-stagger>
+        {steps.map((step, i) => (
+          <li class="bg-ink-2 py-6 pr-6 lg:pl-6 lg:first:pl-0">
+            <span class="font-display text-sm text-brand-light">0{i + 1}</span>
+            <p class="mt-6 font-display text-2xl tracking-tight">{step}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <Plate title="Başlayalım" subtitle="Projenizi anlatın" href="/contact.html" />
+</Base>

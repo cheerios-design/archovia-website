@@ -1,0 +1,46 @@
+---
+import { Image } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import Plate from "../components/Plate.astro";
+import { projects } from "../data/site";
+---
+
+<Base title="Projeler" description="Archovia'nın mimarlık ve iç mimarlık projeleri.">
+  <Plate
+    as="h1"
+    title="Projeler"
+    subtitle="Her biri ayrı bir<br />hikâye anlatan işler"
+    note="Mimarlık ve iç mimarlıkta sınırları zorlayan projelerimizle hem estetik hem de işlevsel alanlar yaratıyoruz."
+    meta={`${projects[0].year}–${projects.at(-1)!.year}`}
+  />
+
+  {projects.map((p) => (
+    <section class="px-frame">
+      <div class="grid md:grid-cols-12">
+        <div class="plate flex flex-col justify-between gap-10 p-6 md:col-span-4 md:p-10">
+          <span class="font-display text-7xl font-bold tracking-tighter md:text-9xl" data-count>{p.no}</span>
+          <div>
+            <h2 class="display text-3xl tracking-tight md:text-4xl">{p.title}</h2>
+            <dl class="mt-6 grid grid-cols-2 border-t border-ink pt-4 text-sm">
+              <dt class="eyebrow text-concrete-dark">Tip</dt>
+              <dd class="font-display">{p.type}</dd>
+              <dt class="eyebrow mt-2 text-concrete-dark">Yıl</dt>
+              <dd class="mt-2 font-display">{p.year}</dd>
+            </dl>
+          </div>
+        </div>
+        <div class="overflow-hidden md:col-span-8" data-clip data-cursor={`Proje ${p.no}`}>
+          <div class="h-full" data-parallax="0.15">
+        <Image
+          src={p.image}
+          alt={`${p.title} — ${p.type} projesi`}
+          widths={[800, 1400]}
+          sizes="(min-width: 768px) 66vw, 100vw"
+          class="aspect-[4/3] h-full w-full object-cover"
+        />
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+</Base>

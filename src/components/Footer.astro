@@ -1,0 +1,41 @@
+---
+import Icon from "./Icons.astro";
+import { nav, site } from "../data/site";
+const year = new Date().getFullYear();
+---
+
+<footer class="px-frame pb-frame text-paper">
+  <div class="plate-dark grid gap-12 px-6 py-12 md:grid-cols-12 md:px-10 md:py-16">
+    <div class="md:col-span-6">
+      <p class="eyebrow text-concrete">Bir sonraki proje</p>
+      <a href="/contact.html" class="group mt-4 flex items-start gap-4">
+        <span class="display text-huge">Birlikte<br />tasarlayalım</span>
+        <Icon name="arrow" class="mt-2 size-10 shrink-0 transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1 md:size-16" />
+      </a>
+    </div>
+
+    <nav class="md:col-span-3 md:col-start-8" aria-label="Alt menü">
+      <p class="eyebrow text-concrete">Sayfalar</p>
+      <ul class="mt-4 space-y-2">
+        {nav.map((item) => (
+          <li><a href={item.href} class="font-display text-lg hover:text-brand-light">{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="md:col-span-2">
+      <p class="eyebrow text-concrete">İletişim</p>
+      <a href={`mailto:${site.email}`} class="mt-4 block font-display text-lg hover:text-brand-light">{site.email}</a>
+    </div>
+  </div>
+
+  <div class="flex flex-col items-start justify-between gap-3 border-t border-ink-3 bg-ink-2 px-6 py-5 text-sm text-concrete md:flex-row md:items-center md:px-10">
+    <span class="flex items-center gap-3">
+      <Icon name="logo" class="h-5 w-auto text-paper" />
+      © {year} Archovia™. Tüm hakları saklıdır.
+    </span>
+    <a href="https://www.cheeriostudios.com/" class="hover:text-paper" target="_blank" rel="noopener">
+      Design &amp; build · <span class="text-paper">Cheerio Studios</span>
+    </a>
+  </div>
+</footer>

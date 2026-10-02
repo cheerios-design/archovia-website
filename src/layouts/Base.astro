@@ -1,0 +1,75 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { site } from "../data/site";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description = site.description } = Astro.props;
+const fullTitle = title ? `${title} — ${site.name}` : `${site.name} — Mimarlık & İç Mimarlık`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL("/brand/og.webp", Astro.site);
+---
+
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#0c0d0a" />
+    <link rel="icon" href="/brand/archovia-logo-trns-beyaz-full-color-rgb.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="tr_TR" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script is:inline>
+      // Hide motion targets before first paint; reveal anyway if the motion script never boots.
+      if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        document.documentElement.classList.add("motion");
+        setTimeout(() => window.__motion || document.documentElement.classList.remove("motion"), 3500);
+      }
+    </script>
+  </head>
+  <body>
+    <a href="#main" class="sr-only z-[60] bg-brand px-4 py-2 font-display text-paper focus:not-sr-only focus:fixed focus:top-2 focus:left-2">
+      İçeriğe geç
+    </a>
+    <div class="fixed inset-x-0 top-0 z-[70] h-[2px] origin-left scale-x-0 bg-brand-light" data-progress aria-hidden="true"></div>
+    <div class="curtain" aria-hidden="true"></div>
+    <Header />
+    <main id="main" class="flex flex-col gap-frame py-frame">
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      import "../scripts/motion";
+
+      // Only play background videos while they're on screen.
+      const vio = new IntersectionObserver((entries) => {
+        for (const e of entries) {
+          const v = e.target as HTMLVideoElement;
+          if (e.isIntersecting) v.play().catch(() => {});
+          else v.pause();
+        }
+      });
+      if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        document.querySelectorAll<HTMLVideoElement>("video[data-autoplay]").forEach((v) => vio.observe(v));
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,277 @@
+@import "@fontsource-variable/space-grotesk";
+@import "@fontsource-variable/inter";
+@import "@fontsource/instrument-serif/400-italic.css";
+@import "tailwindcss";
+
+/*
+  ─── Theme ───────────────────────────────────────────────────────
+  Every colour, font and scale on the site comes from these tokens.
+  To rebrand, change the values here; no component needs editing.
+
+  Palette: warm charcoal "ink", travertine "paper", concrete greys,
+  and an oxblood brick accent ("brand"). brand-light is the same hue
+  lifted for legibility on dark surfaces.
+*/
+@theme {
+  --color-ink: #0e0d0c;
+  --color-ink-2: #171513;
+  --color-ink-3: #282522;
+  --color-paper: #efebe4;
+  --color-paper-2: #e2ddd3;
+  --color-concrete: #928c83;
+  --color-concrete-dark: #5f5a53;
+  --color-brand: #6e1a27;
+  --color-brand-light: #d4878d;
+
+  --font-display: "Space Grotesk Variable", "Space Grotesk", system-ui, sans-serif;
+  --font-sans: "Inter Variable", "Inter", system-ui, sans-serif;
+  --font-serif: "Instrument Serif", Georgia, serif;
+
+  --text-mega: clamp(3.5rem, 15vw, 15rem);
+  --text-mega--line-height: 0.82;
+  --text-mega--letter-spacing: -0.05em;
+  --text-huge: clamp(2.75rem, 8vw, 7.5rem);
+  --text-huge--line-height: 0.88;
+  --text-huge--letter-spacing: -0.04em;
+
+  --spacing-frame: clamp(0.5rem, 1.6vw, 1.5rem);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html {
+    background: var(--color-ink);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    @apply bg-ink font-sans;
+    font-feature-settings: "ss01", "cv11";
+  }
+  ::selection {
+    background: var(--color-brand);
+    color: var(--color-paper);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-brand-light);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 5px var(--color-ink);
+  }
+}
+
+@layer components {
+  .plate {
+    @apply bg-paper text-ink;
+  }
+  .plate-dark {
+    @apply bg-ink-2 text-paper;
+  }
+  .eyebrow {
+    @apply font-display text-xs font-semibold tracking-[0.18em] uppercase;
+  }
+  .display {
+    @apply font-display font-bold uppercase;
+  }
+  .accent {
+    @apply font-serif font-normal tracking-normal normal-case italic;
+  }
+
+  /* Underline that draws in from the left on hover. */
+  .link-arrow {
+    @apply relative inline-flex items-center gap-3 font-display text-sm font-semibold tracking-[0.12em] uppercase;
+  }
+  .link-arrow::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    height: 1.5px;
+    width: 100%;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.6s var(--ease-out-expo);
+  }
+  .link-arrow:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  .link-arrow svg {
+    transition: transform 0.5s var(--ease-out-expo);
+  }
+  .link-arrow:hover svg {
+    transform: translate(4px, -4px);
+  }
+
+  /* Text that rolls up to a duplicate of itself on hover (nav, buttons). */
+  .roll {
+    display: inline-flex;
+    overflow: hidden;
+    position: relative;
+  }
+  .roll > span {
+    display: block;
+    transition: transform 0.55s var(--ease-out-expo);
+  }
+  .roll > span + span {
+    position: absolute;
+    inset: 0;
+    transform: translateY(105%);
+  }
+  :is(a, button):hover .roll > span:first-child {
+    transform: translateY(-105%);
+  }
+  :is(a, button):hover .roll > span + span {
+    transform: translateY(0);
+  }
+
+  /* Services row: burgundy fill wipes up from the bottom. */
+  .wipe-row {
+    position: relative;
+    isolation: isolate;
+  }
+  .wipe-row::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--color-brand);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.6s var(--ease-out-expo);
+  }
+  .wipe-row:hover::before {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+  .wipe-row > * {
+    transition: color 0.4s, transform 0.6s var(--ease-out-expo);
+  }
+  .wipe-row:hover > * {
+    color: var(--color-paper);
+  }
+  .wipe-row:hover h3 {
+    transform: translateX(1rem);
+  }
+}
+
+/* ─── Motion hooks (driven by src/scripts/motion.ts) ─────────────── */
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+/* Split text: each word masks its characters. */
+.split-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.06em;
+  margin-bottom: -0.06em;
+}
+.split-char {
+  display: inline-block;
+  will-change: transform;
+}
+
+/* Hide motion targets until JS takes over, so there is no flash. */
+.motion [data-split],
+.motion [data-fade],
+.motion [data-clip] {
+  visibility: hidden;
+}
+
+/* Infinite marquee */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+/* Custom cursor */
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  pointer-events: none;
+  display: grid;
+  place-items: center;
+  width: 12px;
+  height: 12px;
+  margin: -6px 0 0 -6px;
+  border-radius: 999px;
+  background: var(--color-paper);
+  mix-blend-mode: difference;
+  transition:
+    width 0.45s var(--ease-out-expo),
+    height 0.45s var(--ease-out-expo),
+    margin 0.45s var(--ease-out-expo),
+    background 0.3s;
+}
+.cursor-label {
+  font: 600 0.7rem/1 var(--font-display);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-paper);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.cursor.is-link {
+  width: 48px;
+  height: 48px;
+  margin: -24px 0 0 -24px;
+}
+.cursor.is-label {
+  width: 96px;
+  height: 96px;
+  margin: -48px 0 0 -48px;
+  background: var(--color-brand);
+  mix-blend-mode: normal;
+}
+.cursor.is-label .cursor-label {
+  opacity: 1;
+}
+@media (hover: none), (pointer: coarse) {
+  .cursor {
+    display: none;
+  }
+}
+
+/* Page transition curtain */
+.curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  background: var(--color-brand);
+  transform: scaleY(0);
+  transform-origin: bottom;
+}
+
+/* Header auto-hide */
+.site-header {
+  transition: transform 0.6s var(--ease-out-expo);
+}
+.site-header.is-hidden {
+  transform: translateY(-100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .cursor,
+  .curtain {
+    display: none;
+  }
+}
