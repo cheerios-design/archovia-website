@@ -1,0 +1,16 @@
+---
+/* Dimension string with 45° ticks. Lines grow outward from the label when scrolled into view. */
+interface Props {
+  label: string;
+  class?: string;
+}
+const { label, class: className } = Astro.props;
+---
+
+<div class:list={["dim", className]} data-draw aria-hidden="true">
+  <span class="dim-tick"></span>
+  <span class="dim-line"></span>
+  <span class="annot dim-label">{label}</span>
+  <span class="dim-line"></span>
+  <span class="dim-tick"></span>
+</div>

@@ -1,20 +1,37 @@
 ---
+import { url } from "../lib/url";
 import Icon from "./Icons.astro";
 import { nav, site } from "../data/site";
-const year = new Date().getFullYear();
+interface Props {
+  sheet: { title: string; no: string };
+}
+const { sheet } = Astro.props;
+const now = new Date();
+const year = now.getFullYear();
+const date = now.toLocaleDateString("tr-TR", { day: "2-digit", month: "2-digit", year: "numeric" });
+
+// Architectural title block: every page is a sheet in the drawing set.
+const cells = [
+  ["Proje", "ARCHOVIA STÜDYO"],
+  ["Çizim", sheet.title],
+  ["Ölçek", "1:100"],
+  ["Tarih", date],
+  ["Rev.", "02"],
+  ["Pafta", sheet.no],
+];
 ---
 
 <footer class="px-frame pb-frame text-paper">
   <div class="plate-dark grid gap-12 px-6 py-12 md:grid-cols-12 md:px-10 md:py-16">
-    <div class="md:col-span-6">
+    <div class="md:col-span-7">
       <p class="eyebrow text-concrete">Bir sonraki proje</p>
-      <a href="/contact.html" class="group mt-4 flex items-start gap-4">
-        <span class="display text-huge">Birlikte<br />tasarlayalım</span>
+      <a href={url("/contact.html")} class="group mt-4 flex flex-wrap items-start gap-4">
+        <span class="display text-[clamp(2.5rem,6vw,6rem)] leading-[0.9] tracking-tight">Birlikte<br />tasarlayalım</span>
         <Icon name="arrow" class="mt-2 size-10 shrink-0 transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1 md:size-16" />
       </a>
     </div>
 
-    <nav class="md:col-span-3 md:col-start-8" aria-label="Alt menü">
+    <nav class="md:col-span-2 md:col-start-9" aria-label="Alt menü">
       <p class="eyebrow text-concrete">Sayfalar</p>
       <ul class="mt-4 space-y-2">
         {nav.map((item) => (
@@ -29,13 +46,20 @@ const year = new Date().getFullYear();
     </div>
   </div>
 
-  <div class="flex flex-col items-start justify-between gap-3 border-t border-ink-3 bg-ink-2 px-6 py-5 text-sm text-concrete md:flex-row md:items-center md:px-10">
-    <span class="flex items-center gap-3">
-      <Icon name="logo" class="h-5 w-auto text-paper" />
-      © {year} Archovia™. Tüm hakları saklıdır.
-    </span>
-    <a href="https://www.cheeriostudios.com/" class="hover:text-paper" target="_blank" rel="noopener">
-      Design &amp; build · <span class="text-paper">Cheerio Studios</span>
+  <div class="grid border-t border-ink-3 bg-ink-2 text-concrete sm:grid-cols-3 lg:grid-cols-[1.4fr_repeat(6,1fr)_1.4fr]">
+    <div class="flex items-center gap-3 border-b border-ink-3 px-6 py-4 text-sm sm:col-span-3 lg:col-span-1 lg:border-r lg:border-b-0">
+      <Icon name="logo" class="h-6 w-auto text-paper" />
+      <span>© {year} Archovia™</span>
+    </div>
+    {cells.map(([k, v]) => (
+      <div class="border-b border-ink-3 px-4 py-3 sm:border-r lg:border-b-0">
+        <p class="annot text-concrete/70">{k}</p>
+        <p class:list={["annot mt-1 text-[0.75rem]", k === "Pafta" ? "text-brand-light" : "text-paper"]}>{v}</p>
+      </div>
+    ))}
+    <a href="https://www.cheeriostudios.com/" class="flex flex-col justify-center px-6 py-3 hover:text-paper sm:col-span-3 lg:col-span-1" target="_blank" rel="noopener">
+      <span class="annot text-concrete/70">Tasarım &amp; Yapım</span>
+      <span class="mt-1 font-display text-sm text-paper">Cheerio Studios ↗</span>
     </a>
   </div>
 </footer>

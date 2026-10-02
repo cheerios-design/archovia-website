@@ -1,0 +1,19 @@
+---
+/* Elevation marker used as a section divider:  ▽ +3.20  LABEL ───────────── A-201 */
+interface Props {
+  level: string;
+  label: string;
+  sheet?: string;
+}
+const { level, label, sheet } = Astro.props;
+---
+
+<div class="flex items-center gap-4 px-frame py-2 text-concrete" data-draw aria-hidden="true">
+  <svg viewBox="0 0 20 16" class="h-3.5 w-4 shrink-0 text-brand-light" fill="none" stroke="currentColor" stroke-width="1.5">
+    <path d="M1 1h18L10 15z" /><path d="M1 1h18L10 15z" fill="currentColor" clip-path="inset(0 50% 0 0)" />
+  </svg>
+  <span class="annot text-paper">{level}</span>
+  <span class="annot">{label}</span>
+  <span class="dim-line" style="transform-origin:left"></span>
+  {sheet && <span class="annot">{sheet}</span>}
+</div>

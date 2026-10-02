@@ -1,4 +1,5 @@
 ---
+import { url } from "../lib/url";
 import Icon from "./Icons.astro";
 import { nav } from "../data/site";
 
@@ -7,7 +8,7 @@ const path = Astro.url.pathname.replace(/\/$/, "/index.html");
 
 <header class="site-header sticky top-0 z-50 bg-ink px-frame pt-frame">
   <nav class="flex items-center justify-between gap-6 border-b border-ink-3 pb-3 text-paper" aria-label="Ana menü">
-    <a href="/" class="flex items-center gap-3" aria-label="Archovia ana sayfa">
+    <a href={url("/")} class="flex items-center gap-3" aria-label="Archovia ana sayfa">
       <Icon name="logo" class="h-8 w-auto" />
       <span lang="en" class="display text-lg tracking-[0.08em]">Archovia</span>
     </a>
@@ -33,7 +34,7 @@ const path = Astro.url.pathname.replace(/\/$/, "/index.html");
       })}
     </ul>
 
-    <a href="/contact.html" data-magnetic="0.25" class="hidden rounded-full bg-paper px-5 py-2 font-display text-sm font-semibold uppercase tracking-[0.08em] text-ink transition-colors hover:bg-brand hover:text-paper md:inline-flex">
+    <a href={url("/contact.html")} data-magnetic="0.25" class="hidden rounded-full bg-paper px-5 py-2 font-display text-sm font-semibold uppercase tracking-[0.08em] text-ink transition-colors hover:bg-brand hover:text-paper md:inline-flex">
       <span class="roll"><span>Teklif Alın</span><span aria-hidden="true">Teklif Alın</span></span>
     </a>
 

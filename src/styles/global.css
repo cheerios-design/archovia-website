@@ -1,5 +1,6 @@
 @import "@fontsource-variable/space-grotesk";
 @import "@fontsource-variable/inter";
+@import "@fontsource-variable/jetbrains-mono";
 @import "@fontsource/instrument-serif/400-italic.css";
 @import "tailwindcss";
 
@@ -26,6 +27,7 @@
   --font-display: "Space Grotesk Variable", "Space Grotesk", system-ui, sans-serif;
   --font-sans: "Inter Variable", "Inter", system-ui, sans-serif;
   --font-serif: "Instrument Serif", Georgia, serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
 
   --text-mega: clamp(3.5rem, 15vw, 15rem);
   --text-mega--line-height: 0.82;
@@ -145,15 +147,17 @@
     transform: scaleY(1);
     transform-origin: top;
   }
-  .wipe-row > * {
-    transition: color 0.4s, transform 0.6s var(--ease-out-expo);
-  }
-  .wipe-row:hover > * {
-    color: var(--color-paper);
-  }
-  .wipe-row:hover h3 {
-    transform: translateX(1rem);
-  }
+}
+
+/* Unlayered so the hover colour beats text-* utilities on the row's children. */
+.wipe-row > * {
+  transition: color 0.4s, transform 0.6s var(--ease-out-expo);
+}
+.wipe-row:hover > * {
+  color: var(--color-paper);
+}
+.wipe-row:hover h3 {
+  transform: translateX(1rem);
 }
 
 /* ─── Motion hooks (driven by src/scripts/motion.ts) ─────────────── */
@@ -275,3 +279,110 @@ html.lenis body {
     display: none;
   }
 }
+
+/* ─── Drafting elements ───────────────────────────────────────────
+   Construction-drawing vocabulary: grid paper, dimension strings,
+   crop marks, level markers, a scroll ruler and a coordinate crosshair.
+   All draw in currentColor so they work on paper and ink alike.
+*/
+
+/* Technical annotation text (measurements, sheet numbers) */
+.annot {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+  text-transform: uppercase;
+}
+
+/* Grid paper: minor 24px, major every 5 squares. */
+.grid-paper {
+  --g: color-mix(in oklab, currentColor 7%, transparent);
+  --G: color-mix(in oklab, currentColor 13%, transparent);
+  background-image:
+    linear-gradient(to right, var(--G) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--G) 1px, transparent 1px),
+    linear-gradient(to right, var(--g) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--g) 1px, transparent 1px);
+  background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px;
+  background-position: -1px -1px;
+}
+
+/* Dimension string: ─/── 12 400 ──/─ */
+.dim {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+}
+.dim-line {
+  flex: 1;
+  height: 1px;
+  background: currentColor;
+}
+.dim-line:first-of-type { transform-origin: right; }
+.dim-line:last-of-type { transform-origin: left; }
+.dim-tick {
+  position: relative;
+  width: 1px;
+  height: 14px;
+  background: currentColor;
+  flex-shrink: 0;
+}
+.dim-tick::after {
+  /* 45° architectural tick */
+  content: "";
+  position: absolute;
+  left: -5px;
+  top: 2px;
+  width: 11px;
+  height: 1.5px;
+  background: currentColor;
+  transform: rotate(-45deg) translateY(4px);
+}
+
+/* Crop marks at plate corners */
+.crop > i {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 0 solid currentColor;
+  opacity: 0.45;
+}
+.crop > i:nth-child(1) { top: 0; left: 0; border-top-width: 1px; border-left-width: 1px; }
+.crop > i:nth-child(2) { top: 0; right: 0; border-top-width: 1px; border-right-width: 1px; }
+.crop > i:nth-child(3) { bottom: 0; left: 0; border-bottom-width: 1px; border-left-width: 1px; }
+.crop > i:nth-child(4) { bottom: 0; right: 0; border-bottom-width: 1px; border-right-width: 1px; }
+
+/* Dashed centreline (grid axes) */
+.axis-line {
+  background-image: linear-gradient(to bottom, currentColor 60%, transparent 0);
+  background-size: 1px 14px;
+  width: 1px;
+}
+
+/* Scroll ruler */
+.ruler-ticks {
+  background-image:
+    linear-gradient(to bottom, currentColor 1px, transparent 1px),
+    linear-gradient(to bottom, currentColor 1px, transparent 1px);
+  background-size: 14px 60px, 7px 12px;
+  background-repeat: repeat-y;
+  background-position: right top, right top;
+}
+
+/* Coordinate crosshair over media */
+.crosshair {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+  color: var(--color-paper);
+  mix-blend-mode: difference;
+}
+[data-crosshair]:hover .crosshair { opacity: 1; }
+.crosshair-x, .crosshair-y { position: absolute; background: currentColor; }
+.crosshair-x { left: 0; right: 0; height: 1px; top: 0; }
+.crosshair-y { top: 0; bottom: 0; width: 1px; left: 0; }
+.crosshair-readout { position: absolute; top: 0; left: 0; white-space: nowrap; padding: 6px 8px; }

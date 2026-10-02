@@ -1,9 +1,15 @@
 ---
+import { url } from "../lib/url";
 import { Image } from "astro:assets";
 import Base from "../layouts/Base.astro";
 import Plate from "../components/Plate.astro";
 import Marquee from "../components/Marquee.astro";
 import Icon from "../components/Icons.astro";
+import Level from "../components/drafting/Level.astro";
+import Callout from "../components/drafting/Callout.astro";
+import GridAxes from "../components/drafting/GridAxes.astro";
+import FloorPlan from "../components/drafting/FloorPlan.astro";
+import Dimension from "../components/drafting/Dimension.astro";
 import { images, projects, products, services, site } from "../data/site";
 ---
 
@@ -15,13 +21,15 @@ import { images, projects, products, services, site } from "../data/site";
     subtitle="Mimarlık, iç mimarlık<br />ve ürün tasarımı stüdyosu"
     note="Konut ve ticari alanlarda yenilikçi, sürdürülebilir ve zamansız mekânlar tasarlıyoruz. Her çizgi, orada yaşayacak insanla kurulan bir bağdan doğar."
     meta={`Est. ${site.founded}`}
-    href="/portfolio.html"
+    href={url("/portfolio.html")}
     cursor="Projeler"
+    dimension="12 400"
+    survey
   >
     <Fragment slot="media">
       <video
         class="aspect-[4/5] w-full object-cover sm:aspect-[16/9] lg:aspect-[21/9]"
-        src="/videos/bungalow.mp4"
+        src={url("/videos/bungalow.mp4")}
         poster={images.hero.src}
         muted
         loop
@@ -34,6 +42,8 @@ import { images, projects, products, services, site } from "../data/site";
   </Plate>
 
   <Marquee items={services.map((s) => s.title)} />
+
+  <Level level="±0.00" label="Stüdyo" sheet="A-101" />
 
   <!-- Manifesto -->
   <section class="px-frame">
@@ -49,7 +59,7 @@ import { images, projects, products, services, site } from "../data/site";
             Archovia, yirmi yılı aşkın saha ve tasarım deneyimini {site.founded}'te tek bir stüdyo çatısı altında
             topladı. Müşterilerimizin hayallerini, yaşanabilir ve sürdürülebilir mekânlara dönüştürüyoruz.
           </p>
-          <a href="/about.html" class="link-arrow self-end justify-self-start text-paper hover:text-brand-light">
+          <a href={url("/about.html")} class="link-arrow self-end justify-self-start text-paper hover:text-brand-light">
             Stüdyoyu tanıyın <Icon name="arrow" class="size-5" />
           </a>
         </div>
@@ -57,12 +67,48 @@ import { images, projects, products, services, site } from "../data/site";
     </div>
   </section>
 
+  <!-- Plan: the drawing draws itself while scrolling -->
+  <section class="px-frame">
+    <div class="plate-dark relative overflow-hidden px-5 pt-16 pb-12 sm:px-8 md:px-12 md:pt-24">
+      <GridAxes cols={6} rows={4} />
+      <div class="relative grid gap-12 lg:grid-cols-12">
+        <div class="lg:col-span-4">
+          <div class="flex items-center gap-4" data-fade>
+            <Callout no="01" sheet="A-102" class="text-brand-light" />
+            <p class="eyebrow text-concrete">Zemin kat planı</p>
+          </div>
+          <h2 class="display mt-8 text-5xl leading-[0.9] tracking-tight text-paper md:text-7xl" data-split>
+            Çizgiden<br /><span class="accent">mekâna</span>
+          </h2>
+          <p class="mt-8 max-w-sm text-paper/70" data-fade>
+            Her proje bir çizgiyle başlar. Aks, duvar, açıklık, ölçü: mekânı yaşanır kılan kararların hepsi önce
+            paftada verilir.
+          </p>
+          <dl class="mt-10 grid grid-cols-2 border-t border-ink-3 text-paper" data-stagger>
+            {[["Tip", "Bungalov · A"], ["Brüt alan", "86.5 m²"], ["Ölçek", "1:100"], ["Aks aralığı", "6 975 / 5 425"]].map(([k, v]) => (
+              <div class="border-b border-ink-3 py-3 pr-4">
+                <dt class="annot text-concrete">{k}</dt>
+                <dd class="annot mt-1 text-[0.8rem]">{v}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+        <div class="text-paper lg:col-span-8">
+          <FloorPlan class="mx-auto max-w-4xl" />
+        </div>
+      </div>
+      <Dimension label="Kesit A—A · Ölçek 1:100" class="relative mt-10 text-concrete" />
+    </div>
+  </section>
+
+  <Level level="+3.20" label="Hizmetler" sheet="A-201" />
+
   <!-- Services -->
   <section class="px-frame">
     <div class="plate px-5 py-14 sm:px-8 md:px-12 md:py-20">
       <div class="flex items-end justify-between gap-6">
         <h2 class="display text-huge" data-split>Hizmetler</h2>
-        <p class="eyebrow hidden text-concrete-dark sm:block" data-fade>(02)</p>
+        <span class="hidden sm:block" data-fade><Callout no="02" sheet="A-201" class="text-brand" /></span>
       </div>
       <ul class="mt-12 border-t border-ink" data-stagger>
         {services.map((s) => (
@@ -76,20 +122,22 @@ import { images, projects, products, services, site } from "../data/site";
           </li>
         ))}
       </ul>
-      <a href="/services.html" class="link-arrow mt-10" data-fade>Tüm hizmetler <Icon name="arrow" class="size-5" /></a>
+      <a href={url("/services.html")} class="link-arrow mt-10" data-fade>Tüm hizmetler <Icon name="arrow" class="size-5" /></a>
     </div>
   </section>
+
+  <Level level="+6.40" label="Seçili işler" sheet="A-301" />
 
   <!-- Selected work -->
   <section class="px-frame">
     <div class="flex items-end justify-between bg-ink px-1 pt-14 pb-6 text-paper md:pt-24">
       <h2 class="display text-huge" data-split>Seçili<br /><span class="accent">işler</span></h2>
-      <a href="/portfolio.html" class="link-arrow hover:text-brand-light" data-fade>Portföy <Icon name="arrow" class="size-5" /></a>
+      <a href={url("/portfolio.html")} class="link-arrow hover:text-brand-light" data-fade>Portföy <Icon name="arrow" class="size-5" /></a>
     </div>
     <div class="grid gap-frame md:grid-cols-3">
       {projects.map((p, i) => (
         <a
-          href="/portfolio.html"
+          href={url("/portfolio.html")}
           class:list={["group block bg-paper", i === 1 && "md:mt-28", i === 2 && "md:mt-10"]}
           data-skew
           data-fade
@@ -115,6 +163,8 @@ import { images, projects, products, services, site } from "../data/site";
       ))}
     </div>
   </section>
+
+  <Level level="+9.60" label="Ürünler" sheet="A-302" />
 
   <!-- Products -->
   <section class="px-frame">
@@ -150,12 +200,14 @@ import { images, projects, products, services, site } from "../data/site";
     </div>
   </section>
 
+  <Level level="+12.80" label="Çatı · İletişim" sheet="A-401" />
+
   <Plate
     title="Teklif<br />alın"
     subtitle="Projenizi birlikte<br />gerçeğe dönüştürelim"
     note="Ölçüler, bütçe, zaman çizelgesi — hepsini ilk görüşmede netleştirelim. Şeffaf fiyat, gizli kalem yok."
     meta={site.email}
-    href="/contact.html"
+    href={url("/contact.html")}
     cursor="Yazın"
   >
     <Fragment slot="media">

@@ -1,0 +1,14 @@
+---
+/* Section/detail callout bubble: detail number over sheet reference. */
+interface Props {
+  no: string;
+  sheet: string;
+  class?: string;
+}
+const { no, sheet, class: className } = Astro.props;
+---
+
+<span class:list={["inline-grid size-14 shrink-0 grid-rows-2 rounded-full border border-current text-center", className]} aria-hidden="true">
+  <span class="annot grid place-items-end justify-center border-b border-current pb-0.5 text-[0.75rem] font-semibold">{no}</span>
+  <span class="annot grid place-items-start justify-center pt-0.5 text-[0.55rem]">{sheet}</span>
+</span>

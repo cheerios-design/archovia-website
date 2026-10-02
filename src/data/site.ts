@@ -1,3 +1,4 @@
+import { url } from "../lib/url";
 import about from "../assets/images/about.webp";
 import about1 from "../assets/images/about1.webp";
 import about2 from "../assets/images/about2.webp";
@@ -8,7 +9,7 @@ import proj3 from "../assets/images/proj3.png";
 
 export const site = {
   name: "Archovia",
-  url: "https://www.archovia.com",
+  url: "https://cheerios-design.github.io/archovia-website/",
   email: "info@archovia.com",
   tagline: "Hayal ettiğiniz yaşam alanları arasında duygusal bir bağ kuruyoruz.",
   description:
@@ -20,10 +21,10 @@ export const site = {
 };
 
 export const nav = [
-  { href: "/about.html", label: "Hakkımızda", index: "01" },
-  { href: "/services.html", label: "Hizmetler", index: "02" },
-  { href: "/portfolio.html", label: "Projeler", index: "03" },
-  { href: "/contact.html", label: "İletişim", index: "04" },
+  { href: url("/about.html"), label: "Hakkımızda", index: "A-101" },
+  { href: url("/services.html"), label: "Hizmetler", index: "A-201" },
+  { href: url("/portfolio.html"), label: "Projeler", index: "A-301" },
+  { href: url("/contact.html"), label: "İletişim", index: "A-401" },
 ];
 
 export const images = { about, about1, about2, hero };
@@ -58,7 +59,7 @@ export const projects = [
 ];
 
 export const products = [
-  { title: "Bungalovlar", video: "/videos/bungalow.mp4" },
-  { title: "Masa & Sandalye", video: "/videos/chairntable.mp4" },
-  { title: "Duvar Sanatı", video: "/videos/walldecor.mp4" },
+  { title: "Bungalovlar", video: url("/videos/bungalow.mp4") },
+  { title: "Masa & Sandalye", video: url("/videos/chairntable.mp4") },
+  { title: "Duvar Sanatı", video: url("/videos/walldecor.mp4") },
 ];

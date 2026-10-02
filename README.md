@@ -34,7 +34,7 @@ npm run preview   # serve the build
 | Images | `src/assets/images/` (auto-optimised) |
 | Videos, logos, favicon, OG image | `public/` |
 | Contact form backend | `formEndpoint` in `src/data/site.ts` (Formspree, Basin…) — empty falls back to `mailto:` |
-| Domain | `site` in `astro.config.mjs` and `public/CNAME` |
+| Hosting path | `site` + `base` in `astro.config.mjs` (GitHub Pages project site by default; for a custom domain or Vercel set `site` to the domain and remove `base`). Always link with `url()` from `src/lib/url.ts`. |
 
 ### Rebranding in one place
 
@@ -46,6 +46,24 @@ All colour comes from six tokens. Swap `--color-brand` / `--color-brand-light` f
 | Terracotta | `#9c4221` | `#e2a07f` |
 | Corten | `#7a3b1d` | `#d39a6f` |
 | Patina green | `#2f4a3f` | `#9cbfae` |
+
+## Drafting elements
+
+Architectural drawing vocabulary lives in `src/components/drafting/`:
+
+| Component | What it draws |
+| --- | --- |
+| `FloorPlan` | Ground-floor plan that draws itself layer by layer while scrolling |
+| `Dimension` | Dimension string with 45° ticks (`label="12 400"`) |
+| `Level` | Elevation marker divider (`▽ +3.20  LABEL ─── A-201`) |
+| `Callout` | Section/detail bubble (number over sheet ref) |
+| `GridAxes` | Grid paper + dashed structural axes with lettered/numbered bubbles |
+| `Orientation` | North arrow + graphic scale bar |
+| `Ruler` | Fixed side ruler reading scroll depth as elevation |
+
+Plates also get crop marks automatically; `<Plate dimension="…" survey>` adds a dimension
+string and a coordinate crosshair over its media. The footer is a drawing title block, and each
+page's sheet number comes from `nav[].index` in `src/data/site.ts`.
 
 ## Motion attributes
 
@@ -62,12 +80,16 @@ All colour comes from six tokens. Swap `--color-brand` / `--color-brand-light` f
 | `data-magnetic="0.3"` | Pulled toward the pointer |
 | `data-cursor="Label"` | Cursor expands with a label |
 | `data-count` | Number counts up when visible |
+| `data-draw` | Dimension/level lines grow outward from their label |
+| `data-plan` | SVG drawn layer by layer (`data-layer="1…n"`), scrubbed to scroll |
+| `data-crosshair` | Survey crosshair with live X/Y readout |
 
 Implementation: `src/scripts/motion.ts`.
 
 ## Deploying to GitHub Pages
 
 Push to `main`, then set **Settings → Pages → Source → GitHub Actions**.
+The site is served at `https://cheerios-design.github.io/archovia-website/`.
 
 ## Licences
 

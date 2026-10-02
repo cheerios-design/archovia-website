@@ -1,0 +1,128 @@
+---
+/*
+  Ground-floor plan of a single-storey house, drawn in SVG.
+  Elements carry data-layer 1–5; motion.ts draws each layer's strokes
+  in sequence while the plan scrolls through the viewport:
+    1 grid & axes · 2 walls · 3 openings & doors · 4 furniture · 5 dimensions & text
+  Plan units: 640 = 12 400 mm.
+*/
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+
+const rooms = [
+  { name: "Salon", area: "48.6", x: 230, y: 230 },
+  { name: "Yatak Odası", area: "18.9", x: 515, y: 150 },
+  { name: "Mutfak", area: "9.5", x: 510, y: 360 },
+  { name: "Banyo", area: "9.5", x: 650, y: 335 },
+];
+const gridX = [
+  ["A", 80],
+  ["B", 440],
+  ["C", 580],
+  ["D", 720],
+] as const;
+const gridY = [
+  ["1", 80],
+  ["2", 260],
+  ["3", 440],
+] as const;
+// 45° dimension tick
+const tick = (x: number, y: number) => `M${x - 5} ${y + 5} L${x + 5} ${y - 5}`;
+---
+
+<svg
+  viewBox="-30 -50 840 580"
+  class:list={["w-full", className]}
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="square"
+  data-plan
+  role="img"
+  aria-label="Örnek zemin kat planı: salon 48.6 m², yatak odası 18.9 m², mutfak 9.5 m², banyo 9.5 m²; toplam 12.4 × 7 metre."
+>
+  <!-- 1 · structural grid -->
+  <g stroke-width="0.75" stroke-dasharray="10 4 2 4" opacity="0.35" data-layer="1">
+    {gridX.map(([, x]) => <path d={`M${x} -18 V520`} />)}
+    {gridY.map(([, y]) => <path d={`M-2 ${y} H790`} />)}
+  </g>
+  <g stroke-width="1" data-layer="1">
+    {gridX.map(([l, x]) => (
+      <>
+        <circle cx={x} cy={-30} r="12" />
+        <text x={x} y={-26} class="plan-text" text-anchor="middle">{l}</text>
+      </>
+    ))}
+    {gridY.map(([l, y]) => (
+      <>
+        <circle cx={-14} cy={y} r="12" />
+        <text x={-14} y={y + 4} class="plan-text" text-anchor="middle">{l}</text>
+      </>
+    ))}
+  </g>
+
+  <!-- 2 · walls (exterior heavy, interior lighter); gaps are openings -->
+  <path data-layer="2" stroke-width="7" d="M80 80 H160 M320 80 H520 M640 80 H720 V140 M720 220 V440 H690 M620 440 H360 M300 440 H80 V320 M80 200 V80" />
+  <path data-layer="2" stroke-width="3.5" d="M440 80 V190 M440 240 V300 M440 350 V440 M440 260 H620 M670 260 H720 M580 260 V440" />
+
+  <!-- 3 · windows (double line) and door swings -->
+  <g stroke-width="1" data-layer="3">
+    <path d="M160 77 H320 M160 83 H320 M520 77 H640 M520 83 H640 M717 140 V220 M723 140 V220 M620 437 H690 M620 443 H690 M77 200 V320 M83 200 V320" />
+    <path d="M300 440 V380 M300 380 A60 60 0 0 1 360 440" />
+    <path d="M440 240 H490 M490 240 A50 50 0 0 0 440 190" />
+    <path d="M440 300 H490 M490 300 A50 50 0 0 1 440 350" />
+    <path d="M670 260 V310 M670 310 A50 50 0 0 1 620 260" />
+  </g>
+
+  <!-- 4 · furniture & fixtures -->
+  <g stroke-width="0.9" opacity="0.7" data-layer="4">
+    <rect x="110" y="330" width="170" height="44" rx="4" />
+    <path d="M110 344 H280" />
+    <circle cx="300" cy="170" r="34" />
+    <rect x="285" y="117" width="30" height="16" /><rect x="285" y="207" width="30" height="16" />
+    <rect x="590" y="100" width="112" height="124" rx="3" />
+    <rect x="598" y="108" width="44" height="22" rx="6" /><rect x="650" y="108" width="44" height="22" rx="6" />
+    <rect x="446" y="404" width="128" height="30" /><circle cx="490" cy="419" r="9" /><circle cx="540" cy="419" r="6" />
+    <rect x="628" y="370" width="86" height="64" rx="12" /><ellipse cx="605" cy="290" rx="12" ry="16" />
+  </g>
+
+  <!-- 5 · dimension strings -->
+  <g stroke-width="0.9" data-layer="5">
+    <path d="M80 30 H720 M80 18 V70 M440 18 V70 M720 18 V70" />
+    <path d={[tick(80, 30), tick(440, 30), tick(720, 30)].join(" ")} stroke-width="1.6" />
+    <path d="M80 490 H720 M80 452 V500 M720 452 V500" />
+    <path d={[tick(80, 490), tick(720, 490)].join(" ")} stroke-width="1.6" />
+    <path d="M770 80 V440 M730 80 H780 M730 260 H780 M730 440 H780" />
+    <path d={[tick(770, 80), tick(770, 260), tick(770, 440)].join(" ")} stroke-width="1.6" />
+  </g>
+  <g data-layer="5" class="plan-labels">
+    <text x="260" y="24" class="plan-text" text-anchor="middle">6 975</text>
+    <text x="580" y="24" class="plan-text" text-anchor="middle">5 425</text>
+    <text x="400" y="484" class="plan-text" text-anchor="middle">12 400</text>
+    <text x="0" y="0" class="plan-text" text-anchor="middle" transform="translate(764 170) rotate(-90)">3 488</text>
+    <text x="0" y="0" class="plan-text" text-anchor="middle" transform="translate(764 350) rotate(-90)">3 488</text>
+    {rooms.map((r) => (
+      <>
+        <text x={r.x} y={r.y} class="plan-room" text-anchor="middle">{r.name.toLocaleUpperCase("tr")}</text>
+        <text x={r.x} y={r.y + 16} class="plan-text" text-anchor="middle">{r.area} m²</text>
+      </>
+    ))}
+    <text x="330" y="430" class="plan-text" text-anchor="middle" opacity="0.7">GİRİŞ</text>
+  </g>
+</svg>
+
+<style>
+  .plan-text {
+    font: 500 11px var(--font-mono);
+    letter-spacing: 0.05em;
+    fill: currentColor;
+    stroke: none;
+  }
+  .plan-room {
+    font: 700 13px var(--font-display);
+    letter-spacing: 0.08em;
+    fill: currentColor;
+    stroke: none;
+  }
+</style>

@@ -1,0 +1,14 @@
+---
+/*
+  Fixed vertical ruler on the right edge (desktop). A marker slides down
+  with scroll progress and reads out the "elevation" in metres.
+*/
+---
+
+<div class="pointer-events-none fixed top-0 right-0 bottom-0 z-40 hidden w-6 text-paper/25 lg:block" aria-hidden="true">
+  <div class="ruler-ticks absolute inset-0"></div>
+  <div class="absolute right-0 flex items-center gap-1.5 text-brand-light" data-ruler-marker style="top:0">
+    <span class="annot rounded-sm bg-ink px-1 py-0.5" data-ruler-value>+0.00</span>
+    <span class="h-px w-6 bg-current"></span>
+  </div>
+</div>

@@ -1,7 +1,9 @@
 ---
+import { url } from "../lib/url";
 import { Image } from "astro:assets";
 import Base from "../layouts/Base.astro";
 import Plate from "../components/Plate.astro";
+import Level from "../components/drafting/Level.astro";
 import { images, site } from "../data/site";
 
 const pillars = [
@@ -25,11 +27,14 @@ const pillars = [
     subtitle="Mekânlarınıza<br />değer katıyoruz"
     note="Konut ve ticari alan tasarımlarında yenilikçi ve sürdürülebilir çözümler; mimari tasarımdan danışmanlığa geniş bir yelpazede profesyonel destek."
     meta={`${site.founded} —`}
+    dimension="9 600"
   >
     <Fragment slot="media">
       <Image src={images.about2} alt="Doğayla iç içe bir Archovia bungalovu" widths={[800, 1600, 2400]} sizes="100vw" class="h-[60vh] w-full object-cover" />
     </Fragment>
   </Plate>
+
+  <Level level="±0.00" label="Misyon · Vizyon" sheet="A-102" />
 
   {pillars.map((p, i) => (
     <section class="px-frame" data-fade>
@@ -50,7 +55,7 @@ const pillars = [
       <p class="font-display text-3xl leading-tight tracking-tight md:text-5xl">
         Her proje, orada yaşayacak insanla kurulan bir <span class="accent">diyalogdur.</span>
       </p>
-      <a href="/contact.html" class="link-arrow mt-8">Bir görüşme planlayın →</a>
+      <a href={url("/contact.html")} class="link-arrow mt-8">Bir görüşme planlayın →</a>
     </div>
   </section>
 </Base>

@@ -1,0 +1,29 @@
+---
+/*
+  Structural grid overlay for dark sections: grid paper, dashed column
+  centrelines with lettered bubbles (A, B, C…) and numbered row markers.
+  Place inside a `relative` container.
+*/
+interface Props {
+  cols?: number;
+  rows?: number;
+}
+const { cols = 5, rows = 3 } = Astro.props;
+const letters = "ABCDEFGHJK".slice(0, cols).split("");
+---
+
+<div class="grid-paper pointer-events-none absolute inset-0 overflow-hidden text-paper" aria-hidden="true">
+  <div class="absolute inset-x-[6%] inset-y-0 flex justify-between text-paper/20">
+    {letters.map((l) => (
+      <div class="relative flex flex-col items-center">
+        <span class="annot mt-3 grid size-7 place-items-center rounded-full border border-current text-paper/50">{l}</span>
+        <span class="axis-line mt-1 flex-1"></span>
+      </div>
+    ))}
+  </div>
+  <div class="absolute inset-y-[12%] left-3 flex flex-col justify-between">
+    {Array.from({ length: rows }, (_, i) => (
+      <span class="annot grid size-7 place-items-center rounded-full border border-paper/20 text-paper/50">{i + 1}</span>
+    ))}
+  </div>
+</div>

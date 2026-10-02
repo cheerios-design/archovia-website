@@ -2,6 +2,8 @@
 import { Image } from "astro:assets";
 import Base from "../layouts/Base.astro";
 import Plate from "../components/Plate.astro";
+import Level from "../components/drafting/Level.astro";
+import Dimension from "../components/drafting/Dimension.astro";
 import { projects } from "../data/site";
 ---
 
@@ -12,14 +14,18 @@ import { projects } from "../data/site";
     subtitle="Her biri ayrı bir<br />hikâye anlatan işler"
     note="Mimarlık ve iç mimarlıkta sınırları zorlayan projelerimizle hem estetik hem de işlevsel alanlar yaratıyoruz."
     meta={`${projects[0].year}–${projects.at(-1)!.year}`}
+    dimension="18 000"
   />
 
-  {projects.map((p) => (
+  {projects.map((p, i) => (
+    <>
+    <Level level={`+${(i * 3.2).toFixed(2)}`} label={p.title} sheet={`A-30${i + 1}`} />
     <section class="px-frame">
       <div class="grid md:grid-cols-12">
-        <div class="plate flex flex-col justify-between gap-10 p-6 md:col-span-4 md:p-10">
+        <div class="plate relative flex flex-col justify-between gap-10 p-6 md:col-span-4 md:p-10">
           <span class="font-display text-7xl font-bold tracking-tighter md:text-9xl" data-count>{p.no}</span>
           <div>
+            <Dimension label="Ölçek 1:200" class="mb-6 text-concrete-dark" />
             <h2 class="display text-3xl tracking-tight md:text-4xl">{p.title}</h2>
             <dl class="mt-6 grid grid-cols-2 border-t border-ink pt-4 text-sm">
               <dt class="eyebrow text-concrete-dark">Tip</dt>
@@ -42,5 +48,6 @@ import { projects } from "../data/site";
         </div>
       </div>
     </section>
+    </>
   ))}
 </Base>

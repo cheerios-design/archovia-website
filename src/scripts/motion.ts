@@ -13,6 +13,10 @@
     data-cursor="Label"     custom cursor grows and shows a label over this element
     data-count              number counts up from 0 when scrolled into view
     data-progress           width tracks page scroll progress
+    data-draw               dimension/level lines grow outward from their label on scroll
+    data-plan               SVG drawing; children with data-layer="1…n" are drawn layer by layer, scrubbed
+    data-crosshair          survey crosshair with live X/Y readout (in mm) over the element
+    data-ruler-marker       fixed side ruler marker; reads scroll depth as elevation
 
   prefers-reduced-motion turns all of it off and leaves the content static.
 */
@@ -314,6 +318,73 @@ function initTransitions(): number {
   return intro;
 }
 
+/* ── Drafting: lines, plans, ruler, crosshair ───────────────────── */
+
+function initDrafting() {
+  for (const el of $$("[data-draw]")) {
+    const lines = $$(".dim-line", el);
+    const rest = Array.from(el.children).filter((c) => !c.classList.contains("dim-line"));
+    const tl = gsap.timeline({ scrollTrigger: { trigger: el, start: "top 92%" } });
+    tl.from(lines, { scaleX: 0, duration: 1.4, ease: "expo.inOut" }).from(rest, { autoAlpha: 0, duration: 0.6, stagger: 0.05 }, 0.2);
+  }
+
+  for (const svg of $$<HTMLElement>("[data-plan]")) {
+    const tl = gsap.timeline({
+      scrollTrigger: { trigger: svg, start: "top 80%", end: "bottom 55%", scrub: 0.6 },
+    });
+    const layers = [...new Set($$("[data-layer]", svg).map((l) => l.dataset.layer!))].sort();
+    for (const n of layers) {
+      const groups = $$(`[data-layer="${n}"]`, svg);
+      const strokes = groups.flatMap((g) =>
+        (g as unknown as SVGElement) instanceof SVGGeometryElement ? [g] : $$("path, rect, circle, ellipse, line", g),
+      ) as unknown as SVGGeometryElement[];
+      const texts = groups.flatMap((g) => $$("text", g));
+      for (const st of strokes) {
+        const len = Math.ceil(st.getTotalLength());
+        // Keep a dashed stroke's own pattern by only drawing solid strokes.
+        if (st.closest("[stroke-dasharray]")) continue;
+        gsap.set(st, { strokeDasharray: len, strokeDashoffset: len });
+      }
+      const label = `l${n}`;
+      tl.addLabel(label);
+      tl.to(strokes.filter((st) => !st.closest("[stroke-dasharray]")), { strokeDashoffset: 0, duration: 1, ease: "none", stagger: 0.04 }, label);
+      tl.from(groups.filter((g) => g.closest("[stroke-dasharray]")), { autoAlpha: 0, duration: 0.6 }, label);
+      if (texts.length) tl.from(texts, { autoAlpha: 0, y: 6, duration: 0.5, stagger: 0.03 }, `${label}+=0.5`);
+    }
+  }
+
+  const marker = document.querySelector<HTMLElement>("[data-ruler-marker]");
+  const value = document.querySelector<HTMLElement>("[data-ruler-value]");
+  if (marker && value) {
+    ScrollTrigger.create({
+      start: 0,
+      end: "max",
+      onUpdate: (self) => {
+        gsap.to(marker, { top: `${self.progress * 96 + 1}%`, duration: 0.4, ease: "power3.out", overwrite: true });
+        // Page depth as metres below datum, 1 screen ≈ 3.20 m (one storey).
+        value.textContent = `-${((scrollY / innerHeight) * 3.2).toFixed(2)}`;
+      },
+    });
+  }
+
+  if (!finePointer) return;
+  for (const el of $$("[data-crosshair]")) {
+    const hair = el.querySelector<HTMLElement>(".crosshair");
+    if (!hair) continue;
+    const [hx, hy, read] = [".crosshair-x", ".crosshair-y", ".crosshair-readout"].map((s) => hair.querySelector<HTMLElement>(s)!);
+    el.addEventListener("pointermove", (e) => {
+      const r = el.getBoundingClientRect();
+      const x = e.clientX - r.left;
+      const y = e.clientY - r.top;
+      gsap.set(hx, { y });
+      gsap.set(hy, { x });
+      gsap.set(read, { x: x + 10, y: y + 8 });
+      const mm = (v: number, total: number) => String(Math.round((v / total) * 12400)).padStart(5, "0");
+      read.textContent = `X ${mm(x, r.width)} · Y ${mm(y, r.width)}`;
+    });
+  }
+}
+
 /* ── Boot ───────────────────────────────────────────────────────── */
 
 if (!reduce) {
@@ -325,6 +396,7 @@ if (!reduce) {
   initVelocity();
   initHeader();
   initPointer();
+  initDrafting();
   // Re-measure once fonts and media have settled.
   document.fonts?.ready.then(() => ScrollTrigger.refresh());
   addEventListener("load", () => ScrollTrigger.refresh());

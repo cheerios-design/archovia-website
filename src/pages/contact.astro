@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import Dimension from "../components/drafting/Dimension.astro";
 import Icon from "../components/Icons.astro";
 import { site } from "../data/site";
 
@@ -11,9 +12,10 @@ const label =
 
 <Base title="İletişim" description="Archovia ile projeniz hakkında konuşun.">
   <section class="px-frame">
-    <div class="plate grid gap-12 px-5 py-10 sm:px-8 md:grid-cols-12 md:px-12 md:py-14">
+    <div class="plate grid-paper relative grid gap-12 px-5 py-10 sm:px-8 md:grid-cols-12 md:px-12 md:py-14">
       <div class="md:col-span-5">
         <h1 class="display text-huge" data-split="load">Teklif<br />alın</h1>
+        <Dimension label="Ölçek 1:1 · Sizin projeniz" class="mt-6 text-concrete-dark" />
         <div class="mt-10 flex gap-4">
           <Icon name="asterisk" class="size-7 shrink-0" />
           <p class="max-w-sm text-concrete-dark">
