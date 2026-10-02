@@ -27,9 +27,11 @@ const ogImage = new URL(url("/brand/og.webp"), Astro.site);
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <meta name="theme-color" content="#0c0d0a" />
-    <link rel="icon" href={url("/brand/archovia-logo-trns-beyaz-full-color-rgb.svg")} type="image/svg+xml" />
-    <link rel="icon" href={url("/favicon.ico")} sizes="any" />
+    <meta name="theme-color" content="#0e0d0c" />
+    <link rel="icon" href={url("/favicon.ico")} sizes="32x32" />
+    <link rel="icon" href={url("/favicon.svg")} type="image/svg+xml" />
+    <link rel="apple-touch-icon" href={url("/apple-touch-icon.png")} />
+    <link rel="manifest" href={url("/site.webmanifest")} />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={site.name} />
