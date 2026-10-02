@@ -1,0 +1,29 @@
+:root {
+  --color-ink: #0e0d0c;
+  --color-ink-2: #171513;
+  --color-ink-3: #282522;
+  --color-paper: #efebe4;
+  --color-paper-2: #e2ddd3;
+  --color-concrete: #928c83;
+  --color-concrete-dark: #5f5a53;
+  --color-brand: #6e1a27;
+  --color-brand-light: #d4878d;
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --text-mega: clamp(3.5rem, 15vw, 15rem);
+  --text-huge: clamp(2.75rem, 8vw, 7.5rem);
+  --text-statement: clamp(1.875rem, 4vw, 3.75rem);
+  --text-subhead: 1.125rem;
+  --text-body: 1rem;
+  --text-eyebrow: 0.75rem;
+  --text-link: 0.875rem;
+  --text-annotation: 0.68rem;
+  --spacing-frame: clamp(0.5rem, 1.6vw, 1.5rem);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --duration-cursor: 450ms;
+  --duration-ui: 600ms;
+  --duration-media: 1000ms;
+}

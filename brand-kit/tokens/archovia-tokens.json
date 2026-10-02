@@ -1,0 +1,158 @@
+{
+  "color": {
+    "ink": {
+      "value": "#0e0d0c"
+    },
+    "ink-2": {
+      "value": "#171513"
+    },
+    "ink-3": {
+      "value": "#282522"
+    },
+    "paper": {
+      "value": "#efebe4"
+    },
+    "paper-2": {
+      "value": "#e2ddd3"
+    },
+    "concrete": {
+      "value": "#928c83"
+    },
+    "concrete-dark": {
+      "value": "#5f5a53"
+    },
+    "brand": {
+      "value": "#6e1a27"
+    },
+    "brand-light": {
+      "value": "#d4878d"
+    }
+  },
+  "font": {
+    "display": {
+      "value": "'Space Grotesk', system-ui, sans-serif",
+      "weights": [
+        500,
+        600,
+        700
+      ]
+    },
+    "sans": {
+      "value": "'Inter', system-ui, sans-serif",
+      "weights": [
+        400,
+        500,
+        600
+      ],
+      "features": "ss01, cv11"
+    },
+    "serif": {
+      "value": "'Instrument Serif', Georgia, serif",
+      "style": "italic 400"
+    },
+    "mono": {
+      "value": "'JetBrains Mono', ui-monospace, monospace",
+      "weights": [
+        400,
+        500,
+        600
+      ]
+    }
+  },
+  "type": {
+    "mega": {
+      "size": "clamp(3.5rem, 15vw, 15rem)",
+      "lineHeight": 0.82,
+      "letterSpacing": "-0.05em"
+    },
+    "huge": {
+      "size": "clamp(2.75rem, 8vw, 7.5rem)",
+      "lineHeight": 0.88,
+      "letterSpacing": "-0.04em"
+    },
+    "statement": {
+      "size": "clamp(1.875rem, 4vw, 3.75rem)",
+      "lineHeight": 1.05,
+      "letterSpacing": "-0.025em",
+      "weight": 500
+    },
+    "subhead": {
+      "size": "1.125rem",
+      "lineHeight": 1.1,
+      "weight": 700,
+      "transform": "uppercase"
+    },
+    "body": {
+      "size": "1rem",
+      "lineHeight": 1.6,
+      "weight": 400
+    },
+    "eyebrow": {
+      "size": "0.75rem",
+      "weight": 600,
+      "letterSpacing": "0.18em",
+      "transform": "uppercase"
+    },
+    "link": {
+      "size": "0.875rem",
+      "weight": 600,
+      "letterSpacing": "0.12em",
+      "transform": "uppercase"
+    },
+    "annotation": {
+      "size": "0.68rem",
+      "letterSpacing": "0.06em",
+      "transform": "uppercase",
+      "numeric": "tabular-nums"
+    }
+  },
+  "spacing": {
+    "frame": {
+      "value": "clamp(0.5rem, 1.6vw, 1.5rem)"
+    }
+  },
+  "motion": {
+    "ease-out-expo": {
+      "value": "cubic-bezier(0.16, 1, 0.3, 1)"
+    },
+    "ease-out-quart": {
+      "value": "cubic-bezier(0.25, 1, 0.5, 1)"
+    },
+    "duration-cursor": {
+      "value": "450ms"
+    },
+    "duration-ui": {
+      "value": "600ms"
+    },
+    "duration-media": {
+      "value": "1000ms"
+    }
+  },
+  "logo": {
+    "module": "1/4 of mark width",
+    "unit": "1/16 of mark height",
+    "clearspace": "1 module",
+    "minHeight": {
+      "screen": "24px",
+      "print": "10mm"
+    }
+  },
+  "accentAlternates": {
+    "oxblood": [
+      "#6e1a27",
+      "#d4878d"
+    ],
+    "terracotta": [
+      "#9c4221",
+      "#e2a07f"
+    ],
+    "corten": [
+      "#7a3b1d",
+      "#d39a6f"
+    ],
+    "patina": [
+      "#2f4a3f",
+      "#9cbfae"
+    ]
+  }
+}
